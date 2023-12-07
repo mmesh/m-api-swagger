@@ -1,0 +1,2585 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mmesh/protobuf/rpc/v1/topologyAPI.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TopologyAPI"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}": {
+      "get": {
+        "operationId": "TopologyAPI_GetNetwork",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "delete": {
+        "operationId": "TopologyAPI_DeleteNetwork",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "patch": {
+        "operationId": "TopologyAPI_UpdateNetwork",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "routedSubnets": {
+                  "type": "boolean",
+                  "title": "connect subnets within the network"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets/{subnetID}": {
+      "get": {
+        "operationId": "TopologyAPI_GetSubnet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologySubnet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "delete": {
+        "operationId": "TopologyAPI_DeleteSubnet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "patch": {
+        "operationId": "TopologyAPI_UpdateSubnet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologySubnet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "defaultPolicy": {
+                  "$ref": "#/definitions/topologySecurityPolicy",
+                  "title": "ACCEPT, DROP"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets/{subnetID}/policy": {
+      "get": {
+        "summary": "network security policies",
+        "operationId": "TopologyAPI_GetNetworkPolicy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "delete": {
+        "operationId": "TopologyAPI_DeleteNetworkPolicy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets/{subnetID}:ipam-entry": {
+      "post": {
+        "operationId": "TopologyAPI_RemoveSubnetIPAMEntry",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologySubnet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "endpointID": {
+                  "type": "string"
+                },
+                "IPv4": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets:new": {
+      "post": {
+        "summary": "subnets",
+        "operationId": "TopologyAPI_CreateSubnet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologySubnet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "networkCIDR": {
+                  "type": "string"
+                },
+                "subnetCIDR": {
+                  "type": "string"
+                },
+                "defaultPolicy": {
+                  "$ref": "#/definitions/topologySecurityPolicy",
+                  "title": "ACCEPT, DROP"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks:new": {
+      "post": {
+        "summary": "networks",
+        "operationId": "TopologyAPI_CreateNetwork",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "networkCIDR": {
+                  "type": "string"
+                },
+                "routedSubnets": {
+                  "type": "boolean",
+                  "title": "connect subnets within the network"
+                },
+                "locationID": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}": {
+      "get": {
+        "operationId": "TopologyAPI_GetNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "delete": {
+        "summary": "rpc UpdateNodeCfg (topology.UpdateNodeCfgRequest) returns (topology.Node) {\n    option (google.api.http) = {\n      patch: \"/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/networks/{nodeReq.netID}/subnets/{nodeReq.subnetID}/nodes/{nodeReq.nodeID}:cfg\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "TopologyAPI_DeleteNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:metrics": {
+      "get": {
+        "summary": "nodeMetrics",
+        "operationId": "TopologyAPI_GetNodeMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/tssNodeMetrics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes:new": {
+      "post": {
+        "summary": "nodes",
+        "operationId": "TopologyAPI_CreateGenericNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNodeInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "netID": {
+                  "type": "string"
+                },
+                "subnetID": {
+                  "type": "string"
+                },
+                "nodeName": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "port": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "externalPort": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "type": {
+                  "$ref": "#/definitions/topologyNodeType"
+                },
+                "replicaSet": {
+                  "type": "boolean"
+                },
+                "kubernetesAttrs": {
+                  "$ref": "#/definitions/topologyKubernetesAttrs"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}:topology": {
+      "get": {
+        "summary": "topology",
+        "operationId": "TopologyAPI_GetTopology",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyTopology"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{network.accountID}/tenants/{network.tenantID}/networks/{network.netID}/subnets": {
+      "post": {
+        "operationId": "TopologyAPI_ListSubnets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologySubnets"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "network.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "network.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "network.netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                },
+                "network": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/nodes/{nodeReq.nodeID}:management": {
+      "patch": {
+        "operationId": "TopologyAPI_UpdateNodeManagement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nodeReq.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeReq.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeReq.nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nodeReq": {
+                  "type": "object"
+                },
+                "disableOps": {
+                  "type": "boolean"
+                },
+                "disableExec": {
+                  "type": "boolean"
+                },
+                "disableTransfer": {
+                  "type": "boolean"
+                },
+                "disablePortForwarding": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/nodes/{nodeReq.nodeID}:metadata": {
+      "patch": {
+        "operationId": "TopologyAPI_UpdateNodeMetadata",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nodeReq.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeReq.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeReq.nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nodeReq": {
+                  "type": "object"
+                },
+                "nodeName": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/nodes/{nodeReq.nodeID}:networking": {
+      "patch": {
+        "operationId": "TopologyAPI_UpdateNodeNetworking",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nodeReq.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeReq.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeReq.nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nodeReq": {
+                  "type": "object"
+                },
+                "netID": {
+                  "type": "string"
+                },
+                "subnetID": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "int32 priority = 41;\n bool kubernetesGw = 51;\n bool disableRelay = 61;\n bool disableNetworking = 72;"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{subnet.accountID}/tenants/{subnet.tenantID}/networks/{subnet.netID}/subnets/{subnet.subnetID}/nodes": {
+      "post": {
+        "operationId": "TopologyAPI_ListNodesBySubnet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNodes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subnet.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnet.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnet.netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnet.subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                },
+                "subnet": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{subnetReq.accountID}/tenants/{subnetReq.tenantID}/networks/{subnetReq.netID}/subnets/{subnetReq.subnetID}/policy": {
+      "post": {
+        "summary": "network security policies: network filters",
+        "operationId": "TopologyAPI_CreateNetworkFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subnetReq.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subnetReq": {
+                  "type": "object"
+                },
+                "index": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "srcIPNet": {
+                  "type": "string"
+                },
+                "dstIPNet": {
+                  "type": "string",
+                  "title": "usually, the endpoint addr"
+                },
+                "proto": {
+                  "$ref": "#/definitions/topologyProtocol"
+                },
+                "dstPort": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "policy": {
+                  "$ref": "#/definitions/topologySecurityPolicy",
+                  "title": "ACCEPT, DROP"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{subnetReq.accountID}/tenants/{subnetReq.tenantID}/networks/{subnetReq.netID}/subnets/{subnetReq.subnetID}/policy/{nfID}": {
+      "delete": {
+        "operationId": "TopologyAPI_DeleteNetworkFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subnetReq.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nfID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      },
+      "put": {
+        "operationId": "TopologyAPI_UpdateNetworkFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subnetReq.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.netID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subnetReq.subnetID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nfID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subnetReq": {
+                  "type": "object"
+                },
+                "index": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "srcIPNet": {
+                  "type": "string"
+                },
+                "dstIPNet": {
+                  "type": "string",
+                  "title": "usually, the endpoint addr"
+                },
+                "proto": {
+                  "$ref": "#/definitions/topologyProtocol"
+                },
+                "dstPort": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "policy": {
+                  "$ref": "#/definitions/topologySecurityPolicy",
+                  "title": "ACCEPT, DROP"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{tenant.accountID}/tenants/{tenant.tenantID}/networks": {
+      "post": {
+        "operationId": "TopologyAPI_ListNetworks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNetworks"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenant.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenant.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                },
+                "tenant": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{tenant.accountID}/tenants/{tenant.tenantID}/nodes": {
+      "post": {
+        "operationId": "TopologyAPI_ListNodesByTenant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/topologyNodes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenant.accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenant.tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                },
+                "tenant": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "datetimeDateTime": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "day": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "second": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "eventsEventResult": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN_RESULT",
+        "SUCCESS",
+        "FAIL"
+      ],
+      "default": "UNKNOWN_RESULT"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "metricsEventMetrics": {
+      "type": "object",
+      "properties": {
+        "successCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "failCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "successProbability": {
+          "type": "number",
+          "format": "float"
+        },
+        "failProbability": {
+          "type": "number",
+          "format": "float"
+        },
+        "firstActivity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastActivity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "activityIndex": {
+          "type": "number",
+          "format": "float"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "lastResult": {
+          "$ref": "#/definitions/eventsEventResult"
+        }
+      }
+    },
+    "metricsHostMetrics": {
+      "type": "object",
+      "properties": {
+        "OS": {
+          "type": "string"
+        },
+        "uptime": {
+          "type": "string"
+        },
+        "loadAvg": {
+          "type": "number",
+          "format": "double"
+        },
+        "cpuUsage": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "cpuPressure": {
+          "type": "boolean"
+        },
+        "memoryUsage": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "memoryPressure": {
+          "type": "boolean"
+        },
+        "diskUsage": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "diskPressure": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "resourceListRequest": {
+      "type": "object",
+      "properties": {
+        "pageToken": {
+          "type": "string"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "resourceListResponse": {
+      "type": "object",
+      "properties": {
+        "nextPageToken": {
+          "type": "string"
+        }
+      }
+    },
+    "statusStatusCode": {
+      "type": "string",
+      "enum": [
+        "UNDEFINED",
+        "OK",
+        "CANCELED",
+        "INTERRUPTED",
+        "INCOMPLETE",
+        "SUSPENDED",
+        "FAILED"
+      ],
+      "default": "UNDEFINED"
+    },
+    "statusStatusResponse": {
+      "type": "object",
+      "properties": {
+        "sourceID": {
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/definitions/statusStatusCode"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "tenantTenantReq": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        }
+      }
+    },
+    "topologyAgent": {
+      "type": "object",
+      "properties": {
+        "P2PHostID": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "DNSPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "string transport = 12;"
+        },
+        "externalIPv4": {
+          "type": "string"
+        },
+        "externalPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "canRelay": {
+          "type": "boolean"
+        },
+        "MAddrs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "routes": {
+          "$ref": "#/definitions/topologyRoutes"
+        },
+        "metrics": {
+          "$ref": "#/definitions/topologyAgentMetrics"
+        },
+        "version": {
+          "type": "string"
+        },
+        "devMode": {
+          "type": "boolean"
+        }
+      }
+    },
+    "topologyAgentMetrics": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hostMetrics": {
+          "$ref": "#/definitions/metricsHostMetrics"
+        }
+      }
+    },
+    "topologyAlertMetrics": {
+      "type": "object",
+      "properties": {
+        "totalAlerts": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTriggered": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalResolved": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalInfo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalWarning": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalError": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCritical": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "topologyEndpoint": {
+      "type": "object",
+      "properties": {
+        "endpointID": {
+          "type": "string"
+        },
+        "IPv4": {
+          "type": "string"
+        },
+        "IPv6": {
+          "type": "string"
+        },
+        "DNSName": {
+          "type": "string"
+        },
+        "reqIPv4": {
+          "type": "string",
+          "description": "string QoS_network_class = 41;\n NetworkObjectClass networkObjectClass = 51;",
+          "title": "string DNSDomain = 5;\nstring FQDN = 6;"
+        }
+      }
+    },
+    "topologyFilter": {
+      "type": "object",
+      "properties": {
+        "nfID": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "srcIPNet": {
+          "type": "string"
+        },
+        "dstIPNet": {
+          "type": "string",
+          "title": "usually, the endpoint addr"
+        },
+        "proto": {
+          "$ref": "#/definitions/topologyProtocol"
+        },
+        "dstPort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "policy": {
+          "$ref": "#/definitions/topologySecurityPolicy",
+          "title": "ACCEPT, DROP"
+        }
+      }
+    },
+    "topologyHostStats": {
+      "type": "object",
+      "properties": {
+        "totalLinux": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalMac": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalWindows": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "topologyIPAM": {
+      "type": "object",
+      "properties": {
+        "networkCIDR": {
+          "type": "string"
+        },
+        "subnetCIDR": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "map[endpointID]ipv4"
+        },
+        "leased": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/topologyLeaseEndpointMap"
+          },
+          "title": "map[ipv4]map[endpointID]bool \u0026 map[ipv4]map[nodeID]bool"
+        },
+        "available": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "map[ipv4]bool"
+        },
+        "totalAvailable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalLeased": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "topologyKubernetesAttrs": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "title": "string podName = 11;"
+        },
+        "persistentVolume": {
+          "type": "boolean",
+          "title": "persistent storage volume for metrics and other data"
+        }
+      }
+    },
+    "topologyLeaseEndpointMap": {
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "map[endpointID]bool"
+        },
+        "nodes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "map[nodeID]bool (counts how many nodes have the same endpoint (same ip))"
+        }
+      }
+    },
+    "topologyLinkStatus": {
+      "type": "object",
+      "properties": {
+        "totalNodes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "onlineNodes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offlineNodes": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "topologyMetrics": {
+      "type": "object",
+      "properties": {
+        "linkStatus": {
+          "$ref": "#/definitions/topologyLinkStatus"
+        },
+        "hosts": {
+          "$ref": "#/definitions/topologyHostStats"
+        },
+        "alerts": {
+          "$ref": "#/definitions/topologyAlertMetrics"
+        }
+      }
+    },
+    "topologyNetwork": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "netID": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "networkCIDR": {
+          "type": "string"
+        },
+        "routedSubnets": {
+          "type": "boolean",
+          "title": "connect subnets within the network"
+        },
+        "locationID": {
+          "type": "string"
+        }
+      }
+    },
+    "topologyNetworkReq": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "netID": {
+          "type": "string"
+        }
+      }
+    },
+    "topologyNetworks": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyNetwork"
+          }
+        }
+      }
+    },
+    "topologyNode": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "nodeGroupID": {
+          "type": "string"
+        },
+        "nodeHostID": {
+          "type": "string"
+        },
+        "nodeToken": {
+          "type": "string",
+          "title": "b64-encoded NodeTokenPayload struct"
+        },
+        "cfg": {
+          "$ref": "#/definitions/topologyNodeCfg"
+        },
+        "agent": {
+          "$ref": "#/definitions/topologyAgent"
+        },
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/topologyEndpoint"
+          },
+          "title": "map[endpointID]*Endpoint"
+        },
+        "eventMetrics": {
+          "$ref": "#/definitions/metricsEventMetrics"
+        },
+        "type": {
+          "$ref": "#/definitions/topologyNodeType"
+        },
+        "replicaSet": {
+          "type": "boolean"
+        },
+        "kubernetesAttrs": {
+          "$ref": "#/definitions/topologyKubernetesAttrs"
+        },
+        "lastSeen": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "topologyNodeCfg": {
+      "type": "object",
+      "properties": {
+        "nodeName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "netID": {
+          "type": "string"
+        },
+        "subnetID": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disableRelay": {
+          "type": "boolean"
+        },
+        "disableNetworking": {
+          "type": "boolean"
+        },
+        "management": {
+          "$ref": "#/definitions/topologyNodeManagement"
+        },
+        "maintenance": {
+          "$ref": "#/definitions/topologyNodeMaintenance"
+        }
+      }
+    },
+    "topologyNodeInstance": {
+      "type": "object",
+      "properties": {
+        "node": {
+          "$ref": "#/definitions/topologyNode"
+        },
+        "config": {
+          "$ref": "#/definitions/topologyNodeInstanceConfig"
+        }
+      }
+    },
+    "topologyNodeInstanceConfig": {
+      "type": "object",
+      "properties": {
+        "YAML": {
+          "type": "string"
+        }
+      }
+    },
+    "topologyNodeMaintenance": {
+      "type": "object",
+      "properties": {
+        "autoUpdate": {
+          "type": "boolean"
+        },
+        "schedule": {
+          "$ref": "#/definitions/datetimeDateTime"
+        }
+      }
+    },
+    "topologyNodeManagement": {
+      "type": "object",
+      "properties": {
+        "disableExec": {
+          "type": "boolean"
+        },
+        "disableTransfer": {
+          "type": "boolean"
+        },
+        "disablePortForwarding": {
+          "type": "boolean"
+        },
+        "disableOps": {
+          "type": "boolean"
+        }
+      }
+    },
+    "topologyNodeReq": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        }
+      }
+    },
+    "topologyNodeSummary": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string"
+        },
+        "tenantDescription": {
+          "type": "string"
+        },
+        "netID": {
+          "type": "string"
+        },
+        "networkDescription": {
+          "type": "string"
+        },
+        "networkCIDR": {
+          "type": "string"
+        },
+        "networkLocationID": {
+          "type": "string"
+        },
+        "subnetID": {
+          "type": "string"
+        },
+        "subnetDescription": {
+          "type": "string"
+        },
+        "subnetCIDR": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "nodeName": {
+          "type": "string"
+        },
+        "nodeDescription": {
+          "type": "string"
+        },
+        "nodeCanRelay": {
+          "type": "boolean"
+        },
+        "nodeKubernetesGw": {
+          "type": "boolean"
+        },
+        "nodeOffline": {
+          "type": "boolean"
+        }
+      }
+    },
+    "topologyNodeSummaryMap": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/topologyNodeSummary"
+          },
+          "title": "map[nodeID]*NodeSummary"
+        }
+      }
+    },
+    "topologyNodeType": {
+      "type": "string",
+      "enum": [
+        "GENERIC",
+        "K8S_GATEWAY",
+        "K8S_POD"
+      ],
+      "default": "GENERIC"
+    },
+    "topologyNodes": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyNode"
+          }
+        }
+      }
+    },
+    "topologyPolicy": {
+      "type": "object",
+      "properties": {
+        "defaultPolicy": {
+          "$ref": "#/definitions/topologySecurityPolicy",
+          "title": "ACCEPT, DROP"
+        },
+        "networkFilters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyFilter"
+          },
+          "title": "map\u003cstring, Filter\u003e networkFilters = 11;  // map[nfID]*NetworkFilter"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "topologyProtocol": {
+      "type": "string",
+      "enum": [
+        "ANY",
+        "TCP",
+        "UDP",
+        "ICMPv4",
+        "ICMPv6"
+      ],
+      "default": "ANY"
+    },
+    "topologyRoutes": {
+      "type": "object",
+      "properties": {
+        "export": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "import": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "topologySecurityPolicy": {
+      "type": "string",
+      "enum": [
+        "ACCEPT",
+        "DROP"
+      ],
+      "default": "ACCEPT"
+    },
+    "topologyStats": {
+      "type": "object",
+      "properties": {
+        "totalNetworks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalSubnets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalNodes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalEndpoints": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "metrics": {
+          "$ref": "#/definitions/topologyMetrics"
+        }
+      }
+    },
+    "topologySubnet": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "netID": {
+          "type": "string"
+        },
+        "subnetID": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "IPAM": {
+          "$ref": "#/definitions/topologyIPAM"
+        },
+        "networkPolicy": {
+          "$ref": "#/definitions/topologyPolicy"
+        }
+      }
+    },
+    "topologySubnetReq": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "netID": {
+          "type": "string"
+        },
+        "subnetID": {
+          "type": "string"
+        }
+      }
+    },
+    "topologySubnets": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "Subnets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologySubnet"
+          }
+        }
+      }
+    },
+    "topologyTopology": {
+      "type": "object",
+      "properties": {
+        "stats": {
+          "$ref": "#/definitions/topologyStats"
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyTopologyNetwork"
+          }
+        }
+      }
+    },
+    "topologyTopologyNetwork": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/topologyNetwork"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyTopologySubnet"
+          }
+        },
+        "metrics": {
+          "$ref": "#/definitions/topologyMetrics"
+        }
+      }
+    },
+    "topologyTopologyNode": {
+      "type": "object",
+      "properties": {
+        "node": {
+          "$ref": "#/definitions/topologyNode"
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyEndpoint"
+          }
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "alerts": {
+          "$ref": "#/definitions/topologyAlertMetrics"
+        }
+      }
+    },
+    "topologyTopologySubnet": {
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/topologySubnet"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyTopologyNode"
+          }
+        },
+        "metrics": {
+          "$ref": "#/definitions/topologyMetrics"
+        }
+      }
+    },
+    "tssHostMetrics": {
+      "type": "object",
+      "properties": {
+        "loadAvg": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tssTimeValue"
+          }
+        },
+        "cpuUsage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tssTimeValue"
+          }
+        },
+        "memUsage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tssTimeValue"
+          }
+        },
+        "diskUsage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tssTimeValue"
+          }
+        },
+        "netUsage": {
+          "$ref": "#/definitions/tssNetMetrics"
+        }
+      }
+    },
+    "tssNetMetrics": {
+      "type": "object",
+      "properties": {
+        "netRxBytes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tssTimeValue"
+          }
+        },
+        "netTxBytes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tssTimeValue"
+          }
+        }
+      }
+    },
+    "tssNodeMetrics": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string",
+          "title": "string netID = 3;\nstring subnetID = 4;"
+        },
+        "queryID": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/tssHostMetrics"
+          },
+          "title": "map[TimeRange.String()]*HostMetrics"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "tssTimeValue": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    }
+  }
+}

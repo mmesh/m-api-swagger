@@ -1,0 +1,2450 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mmesh/protobuf/rpc/v1/servicesAPI.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ServicesAPI"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/services/{provider.serviceID}/providers/{provider.providerID}/products": {
+      "post": {
+        "summary": "product\n  rpc NewProduct(services.Product) returns (services.Product) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/providers/{providerID}/products:new\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_ListProducts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesProducts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "provider.serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provider.providerID",
+            "description": "== accountID since mmesh customers can be external providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                },
+                "provider": {
+                  "type": "object",
+                  "properties": {
+                    "prefix": {
+                      "type": "string",
+                      "description": "3-letter prefix:\nmcp (mmesh cloud platform), scw (scaleway), lnd (linode), dgo (digitalOcean)..."
+                    },
+                    "isCustomer": {
+                      "type": "boolean",
+                      "title": "mmesh customers can be external service providers"
+                    },
+                    "type": {
+                      "$ref": "#/definitions/servicesProviderType"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "websiteURL": {
+                      "type": "string"
+                    },
+                    "lastUpdated": {
+                      "type": "string",
+                      "format": "int64"
+                    },
+                    "supportChannels": {
+                      "$ref": "#/definitions/servicesSupportChannels"
+                    },
+                    "rating": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/pricingPlans": {
+      "post": {
+        "summary": "pricingPlan\n  rpc NewPricingPlan(services.PricingPlan) returns (services.PricingPlan) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/pricingPlans:new\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_ListPricingPlans",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesPricingPlans"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/pricingPlans/{pricingPlanID}": {
+      "get": {
+        "operationId": "ServicesAPI_GetPricingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesPricingPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pricingPlanID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unitLabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "prices",
+            "description": "map[stripePriceRecurringInterval]*Price\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "resources.discount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.user.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.tenant.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.network.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.subnet.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.node.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxGiB.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxGiB.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxTenants.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxTenants.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxNetworks.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxNetworks.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxSubnets.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxSubnets.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxNodes.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxNodes.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "included3rdPartyServices",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      },
+      "delete": {
+        "summary": "rpc SetPricingPlan(services.PricingPlan) returns (services.PricingPlan) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/pricingPlans/{pricingPlanID}\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_DeletePricingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pricingPlanID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unitLabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "prices",
+            "description": "map[stripePriceRecurringInterval]*Price\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "resources.discount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.user.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.tenant.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.network.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.subnet.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "resources.node.includedUnits",
+            "description": "int64 listPrice = 11;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxGiB.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxGiB.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxTenants.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxTenants.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxNetworks.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxNetworks.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxSubnets.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxSubnets.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "networkLimits.maxNodes.limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "networkLimits.maxNodes.enforceRestriction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "included3rdPartyServices",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/providers": {
+      "post": {
+        "summary": "provider\n  rpc NewProvider(services.Provider) returns (services.Provider) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/providers:new\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_ListProviders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesProviders"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                },
+                "providerType": {
+                  "$ref": "#/definitions/servicesProviderType"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/providers/{providerID}": {
+      "get": {
+        "operationId": "ServicesAPI_GetProvider",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesProvider"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerID",
+            "description": "== accountID since mmesh customers can be external providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prefix",
+            "description": "3-letter prefix:\nmcp (mmesh cloud platform), scw (scaleway), lnd (linode), dgo (digitalOcean)...",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isCustomer",
+            "description": "mmesh customers can be external service providers",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "CLOUD",
+              "PROFESSIONAL_SERVICES"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "websiteURL",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lastUpdated",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "supportChannels.slack",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "supportChannels.slackChannel",
+            "description": "slack channel at m-gate org",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "rating",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      },
+      "delete": {
+        "summary": "rpc SetProvider(services.Provider) returns (services.Provider) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/providers/{providerID}\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_DeleteProvider",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerID",
+            "description": "== accountID since mmesh customers can be external providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prefix",
+            "description": "3-letter prefix:\nmcp (mmesh cloud platform), scw (scaleway), lnd (linode), dgo (digitalOcean)...",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isCustomer",
+            "description": "mmesh customers can be external service providers",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "CLOUD",
+              "PROFESSIONAL_SERVICES"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "websiteURL",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lastUpdated",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "supportChannels.slack",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "supportChannels.slackChannel",
+            "description": "slack channel at m-gate org",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "rating",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/providers/{providerID}/products/{productID}": {
+      "get": {
+        "operationId": "ServicesAPI_GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerID",
+            "description": "== accountID since mmesh customers can be external providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productID",
+            "description": "naming convention: providerPrefix_providerProductName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unitLabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "available",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "pricingModel",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PRICING_FREE",
+              "PRICING_CUSTOM",
+              "PRICING_FIXED",
+              "PRICING_HOURLY",
+              "PRICING_DAILY",
+              "PRICING_WEEKLY",
+              "PRICING_MONTHLY",
+              "PRICING_YEARLY"
+            ],
+            "default": "PRICING_FREE"
+          },
+          {
+            "name": "priceFixed",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceHourly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceDaily",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceWeekly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceMonthly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceYearly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "SLA",
+            "description": "managed tasks (uber-style): incidents, changes, maintenance...",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BEST_EFFORT",
+              "BASIC",
+              "PLUS",
+              "BUSINESS",
+              "ENTERPRISE"
+            ],
+            "default": "BEST_EFFORT"
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLASS_UNSPECIFIED",
+              "CLASS_CLOUD",
+              "CLASS_SERVICE"
+            ],
+            "default": "CLASS_UNSPECIFIED"
+          },
+          {
+            "name": "cloudCategory",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLOUD_UNSPECIFIED",
+              "CLOUD_NETWORK",
+              "CLOUD_COMPUTE",
+              "CLOUD_STORAGE",
+              "CLOUD_APP",
+              "CLOUD_DATABASE",
+              "CLOUD_FUNCTION"
+            ],
+            "default": "CLOUD_UNSPECIFIED"
+          },
+          {
+            "name": "cloudType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLOUD_TYPE_UNSPECIFIED",
+              "CLOUD_NETWORK_BANDWIDTH",
+              "CLOUD_COMPUTE_INSTANCE",
+              "CLOUD_COMPUTE_KUBERNETES_CLUSTER",
+              "CLOUD_COMPUTE_KUBERNETES_NODE",
+              "CLOUD_COMPUTE_NOMAD_CLUSTER",
+              "CLOUD_STORAGE_VOLUME",
+              "CLOUD_APP_CUSTOM",
+              "CLOUD_DATABASE_REDIS",
+              "CLOUD_FUNCTION_LAMBDA"
+            ],
+            "default": "CLOUD_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "serviceCategory",
+            "description": " - SERVICE_ADVISORY_SERVICE: consulting services\n - SERVICE_MANAGED_SERVICE: managed services\n - SERVICE_INFRASTRUCTURE_PROJECT: cloud migration, infra modernization, networkarch.\n - SERVICE_AUTOMATION_PROJECT: automation project\n - SERVICE_SOFTWARE_DEVELOPMENT: software project\n - SERVICE_PROJECT_MANAGEMENT: project management\n - SERVICE_SPECIAL_PROJECT: special project\n - SERVICE_SPECIAL_TASK: special task (help during emergency or incident response)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SERVICE_UNSPECIFIED",
+              "SERVICE_ADVISORY_SERVICE",
+              "SERVICE_MANAGED_SERVICE",
+              "SERVICE_INFRASTRUCTURE_PROJECT",
+              "SERVICE_AUTOMATION_PROJECT",
+              "SERVICE_SOFTWARE_DEVELOPMENT",
+              "SERVICE_PROJECT_MANAGEMENT",
+              "SERVICE_SPECIAL_PROJECT",
+              "SERVICE_SPECIAL_TASK"
+            ],
+            "default": "SERVICE_UNSPECIFIED"
+          },
+          {
+            "name": "serviceType",
+            "description": " - SERVICE_MANAGED_SERVICE_CLOUD: monitoring, alerting, backup..\n - SERVICE_MANAGED_SERVICE_ONPREM: monitoring, alerting, backup..\n - SERVICE_MANAGED_SERVICE_INFRASTRUCTURE_MAINTENANCE: upgrades, patches..\n - SERVICE_MANAGED_SERVICE_SOFTWARE_MAINTENANCE: upgrades, patches..\n - SERVICE_INFRASTRUCTURE_PROJECT_NETWORK: design, build network\n - SERVICE_INFRASTRUCTURE_PROJECT_CLOUD: design, build network, VM, container (mongodb, jenkins..)\n - SERVICE_INFRASTRUCTURE_PROJECT_ONPREM: design, build network, VM, container (mongodb, jenkins..)\n - SERVICE_SOFTWARE_DEVELOPMENT_MAINTENANCE: upgrades, patches..\n - SERVICE_SOFTWARE_DEVELOPMENT_FEATURE_REQUEST: new features, integrations\n - SERVICE_SPECIAL_TASK_SECURITY_ASSESSMENT: security \u0026 virus scans, reports..",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SERVICE_TYPE_UNSPECIFIED",
+              "SERVICE_ADVISORY_SERVICE_ARCHITECTURE",
+              "SERVICE_ADVISORY_SERVICE_SUPPORT",
+              "SERVICE_MANAGED_SERVICE_CLOUD",
+              "SERVICE_MANAGED_SERVICE_ONPREM",
+              "SERVICE_MANAGED_SERVICE_INFRASTRUCTURE_MAINTENANCE",
+              "SERVICE_MANAGED_SERVICE_SOFTWARE_MAINTENANCE",
+              "SERVICE_INFRASTRUCTURE_PROJECT_NETWORK",
+              "SERVICE_INFRASTRUCTURE_PROJECT_CLOUD",
+              "SERVICE_INFRASTRUCTURE_PROJECT_ONPREM",
+              "SERVICE_INFRASTRUCTURE_PROJECT_MIGRATION",
+              "SERVICE_AUTOMATION_PROJECT_SIMPLE",
+              "SERVICE_AUTOMATION_PROJECT_COMPLEX",
+              "SERVICE_SOFTWARE_DEVELOPMENT_SIMPLE",
+              "SERVICE_SOFTWARE_DEVELOPMENT_COMPLEX",
+              "SERVICE_SOFTWARE_DEVELOPMENT_SUPPORT",
+              "SERVICE_SOFTWARE_DEVELOPMENT_MAINTENANCE",
+              "SERVICE_SOFTWARE_DEVELOPMENT_FEATURE_REQUEST",
+              "SERVICE_PROJECT_MANAGEMENT_SIMPLE",
+              "SERVICE_PROJECT_MANAGEMENT_COMPLEX",
+              "SERVICE_SPECIAL_PROJECT_SIMPLE",
+              "SERVICE_SPECIAL_PROJECT_COMPLEX",
+              "SERVICE_SPECIAL_TASK_SIMPLE",
+              "SERVICE_SPECIAL_TASK_COMPLEX",
+              "SERVICE_SPECIAL_TASK_INCIDENT_RESPONSE",
+              "SERVICE_SPECIAL_TASK_SECURITY_ASSESSMENT",
+              "SERVICE_SPECIAL_TASK_HEALTH_CHECKING",
+              "SERVICE_SPECIAL_TASK_COMPLIANCE_ASSESSMENT"
+            ],
+            "default": "SERVICE_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "serviceScope",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SCOPE_UNDEFINED",
+              "SCOPE_ALL",
+              "SCOPE_DESIGN",
+              "SCOPE_IMPLEMENTATION",
+              "SCOPE_MAINTENANCE",
+              "SCOPE_SUPPORT"
+            ],
+            "default": "SCOPE_UNDEFINED"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "langs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "opMgrs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "salesReps",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      },
+      "delete": {
+        "summary": "rpc SetProduct(services.Product) returns (services.Product) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/providers/{providerID}/products/{productID}\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_DeleteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerID",
+            "description": "== accountID since mmesh customers can be external providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productID",
+            "description": "naming convention: providerPrefix_providerProductName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unitLabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "available",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "pricingModel",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PRICING_FREE",
+              "PRICING_CUSTOM",
+              "PRICING_FIXED",
+              "PRICING_HOURLY",
+              "PRICING_DAILY",
+              "PRICING_WEEKLY",
+              "PRICING_MONTHLY",
+              "PRICING_YEARLY"
+            ],
+            "default": "PRICING_FREE"
+          },
+          {
+            "name": "priceFixed",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceHourly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceDaily",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceWeekly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceMonthly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "priceYearly",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "SLA",
+            "description": "managed tasks (uber-style): incidents, changes, maintenance...",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BEST_EFFORT",
+              "BASIC",
+              "PLUS",
+              "BUSINESS",
+              "ENTERPRISE"
+            ],
+            "default": "BEST_EFFORT"
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLASS_UNSPECIFIED",
+              "CLASS_CLOUD",
+              "CLASS_SERVICE"
+            ],
+            "default": "CLASS_UNSPECIFIED"
+          },
+          {
+            "name": "cloudCategory",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLOUD_UNSPECIFIED",
+              "CLOUD_NETWORK",
+              "CLOUD_COMPUTE",
+              "CLOUD_STORAGE",
+              "CLOUD_APP",
+              "CLOUD_DATABASE",
+              "CLOUD_FUNCTION"
+            ],
+            "default": "CLOUD_UNSPECIFIED"
+          },
+          {
+            "name": "cloudType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLOUD_TYPE_UNSPECIFIED",
+              "CLOUD_NETWORK_BANDWIDTH",
+              "CLOUD_COMPUTE_INSTANCE",
+              "CLOUD_COMPUTE_KUBERNETES_CLUSTER",
+              "CLOUD_COMPUTE_KUBERNETES_NODE",
+              "CLOUD_COMPUTE_NOMAD_CLUSTER",
+              "CLOUD_STORAGE_VOLUME",
+              "CLOUD_APP_CUSTOM",
+              "CLOUD_DATABASE_REDIS",
+              "CLOUD_FUNCTION_LAMBDA"
+            ],
+            "default": "CLOUD_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "serviceCategory",
+            "description": " - SERVICE_ADVISORY_SERVICE: consulting services\n - SERVICE_MANAGED_SERVICE: managed services\n - SERVICE_INFRASTRUCTURE_PROJECT: cloud migration, infra modernization, networkarch.\n - SERVICE_AUTOMATION_PROJECT: automation project\n - SERVICE_SOFTWARE_DEVELOPMENT: software project\n - SERVICE_PROJECT_MANAGEMENT: project management\n - SERVICE_SPECIAL_PROJECT: special project\n - SERVICE_SPECIAL_TASK: special task (help during emergency or incident response)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SERVICE_UNSPECIFIED",
+              "SERVICE_ADVISORY_SERVICE",
+              "SERVICE_MANAGED_SERVICE",
+              "SERVICE_INFRASTRUCTURE_PROJECT",
+              "SERVICE_AUTOMATION_PROJECT",
+              "SERVICE_SOFTWARE_DEVELOPMENT",
+              "SERVICE_PROJECT_MANAGEMENT",
+              "SERVICE_SPECIAL_PROJECT",
+              "SERVICE_SPECIAL_TASK"
+            ],
+            "default": "SERVICE_UNSPECIFIED"
+          },
+          {
+            "name": "serviceType",
+            "description": " - SERVICE_MANAGED_SERVICE_CLOUD: monitoring, alerting, backup..\n - SERVICE_MANAGED_SERVICE_ONPREM: monitoring, alerting, backup..\n - SERVICE_MANAGED_SERVICE_INFRASTRUCTURE_MAINTENANCE: upgrades, patches..\n - SERVICE_MANAGED_SERVICE_SOFTWARE_MAINTENANCE: upgrades, patches..\n - SERVICE_INFRASTRUCTURE_PROJECT_NETWORK: design, build network\n - SERVICE_INFRASTRUCTURE_PROJECT_CLOUD: design, build network, VM, container (mongodb, jenkins..)\n - SERVICE_INFRASTRUCTURE_PROJECT_ONPREM: design, build network, VM, container (mongodb, jenkins..)\n - SERVICE_SOFTWARE_DEVELOPMENT_MAINTENANCE: upgrades, patches..\n - SERVICE_SOFTWARE_DEVELOPMENT_FEATURE_REQUEST: new features, integrations\n - SERVICE_SPECIAL_TASK_SECURITY_ASSESSMENT: security \u0026 virus scans, reports..",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SERVICE_TYPE_UNSPECIFIED",
+              "SERVICE_ADVISORY_SERVICE_ARCHITECTURE",
+              "SERVICE_ADVISORY_SERVICE_SUPPORT",
+              "SERVICE_MANAGED_SERVICE_CLOUD",
+              "SERVICE_MANAGED_SERVICE_ONPREM",
+              "SERVICE_MANAGED_SERVICE_INFRASTRUCTURE_MAINTENANCE",
+              "SERVICE_MANAGED_SERVICE_SOFTWARE_MAINTENANCE",
+              "SERVICE_INFRASTRUCTURE_PROJECT_NETWORK",
+              "SERVICE_INFRASTRUCTURE_PROJECT_CLOUD",
+              "SERVICE_INFRASTRUCTURE_PROJECT_ONPREM",
+              "SERVICE_INFRASTRUCTURE_PROJECT_MIGRATION",
+              "SERVICE_AUTOMATION_PROJECT_SIMPLE",
+              "SERVICE_AUTOMATION_PROJECT_COMPLEX",
+              "SERVICE_SOFTWARE_DEVELOPMENT_SIMPLE",
+              "SERVICE_SOFTWARE_DEVELOPMENT_COMPLEX",
+              "SERVICE_SOFTWARE_DEVELOPMENT_SUPPORT",
+              "SERVICE_SOFTWARE_DEVELOPMENT_MAINTENANCE",
+              "SERVICE_SOFTWARE_DEVELOPMENT_FEATURE_REQUEST",
+              "SERVICE_PROJECT_MANAGEMENT_SIMPLE",
+              "SERVICE_PROJECT_MANAGEMENT_COMPLEX",
+              "SERVICE_SPECIAL_PROJECT_SIMPLE",
+              "SERVICE_SPECIAL_PROJECT_COMPLEX",
+              "SERVICE_SPECIAL_TASK_SIMPLE",
+              "SERVICE_SPECIAL_TASK_COMPLEX",
+              "SERVICE_SPECIAL_TASK_INCIDENT_RESPONSE",
+              "SERVICE_SPECIAL_TASK_SECURITY_ASSESSMENT",
+              "SERVICE_SPECIAL_TASK_HEALTH_CHECKING",
+              "SERVICE_SPECIAL_TASK_COMPLIANCE_ASSESSMENT"
+            ],
+            "default": "SERVICE_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "serviceScope",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SCOPE_UNDEFINED",
+              "SCOPE_ALL",
+              "SCOPE_DESIGN",
+              "SCOPE_IMPLEMENTATION",
+              "SCOPE_MAINTENANCE",
+              "SCOPE_SUPPORT"
+            ],
+            "default": "SCOPE_UNDEFINED"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "langs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "opMgrs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "salesReps",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/providers/{providerID}:catalog": {
+      "post": {
+        "summary": "provider product catalog",
+        "operationId": "ServicesAPI_SetProductCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "APIVersion": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "providerName": {
+                  "type": "string"
+                },
+                "providerDescription": {
+                  "type": "string"
+                },
+                "providerWebsiteURL": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/proProductSpec"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/resourceUnits": {
+      "post": {
+        "summary": "resourceUnit\n  rpc NewResourceUnit(services.ResourceUnit) returns (services.ResourceUnit) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/resourceUnits:new\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_ListResourceUnits",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesResourceUnits"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/resourceListRequest"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    },
+    "/api/v1/services/{serviceID}/resourceUnits/{resourceUnitID}": {
+      "get": {
+        "operationId": "ServicesAPI_GetResourceUnit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicesResourceUnit"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUnitID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "prices",
+            "description": "map[stripePriceRecurringInterval]*Price\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      },
+      "delete": {
+        "summary": "rpc SetResourceUnit(services.ResourceUnit) returns (services.ResourceUnit) {\n    option (google.api.http) = {\n      post: \"/api/v1/services/{serviceID}/resourceUnits/{resourceUnitID}\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "ServicesAPI_DeleteResourceUnit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUnitID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "prices",
+            "description": "map[stripePriceRecurringInterval]*Price\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ServicesAPI"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "proProductSpec": {
+      "type": "object",
+      "properties": {
+        "productID": {
+          "type": "string"
+        },
+        "stripeProductID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unitLabel": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "pricingModel": {
+          "type": "string"
+        },
+        "priceFixed": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceHourly": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceDaily": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceWeekly": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceMonthly": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceYearly": {
+          "type": "number",
+          "format": "double"
+        },
+        "SLA": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "cloudCategory": {
+          "type": "string"
+        },
+        "cloudType": {
+          "type": "string"
+        },
+        "serviceCategory": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "serviceScope": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "langs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "opMgrs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "salesReps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "resourceListRequest": {
+      "type": "object",
+      "properties": {
+        "pageToken": {
+          "type": "string"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "resourceListResponse": {
+      "type": "object",
+      "properties": {
+        "nextPageToken": {
+          "type": "string"
+        }
+      }
+    },
+    "servicesCloudCategory": {
+      "type": "string",
+      "enum": [
+        "CLOUD_UNSPECIFIED",
+        "CLOUD_NETWORK",
+        "CLOUD_COMPUTE",
+        "CLOUD_STORAGE",
+        "CLOUD_APP",
+        "CLOUD_DATABASE",
+        "CLOUD_FUNCTION"
+      ],
+      "default": "CLOUD_UNSPECIFIED"
+    },
+    "servicesCloudType": {
+      "type": "string",
+      "enum": [
+        "CLOUD_TYPE_UNSPECIFIED",
+        "CLOUD_NETWORK_BANDWIDTH",
+        "CLOUD_COMPUTE_INSTANCE",
+        "CLOUD_COMPUTE_KUBERNETES_CLUSTER",
+        "CLOUD_COMPUTE_KUBERNETES_NODE",
+        "CLOUD_COMPUTE_NOMAD_CLUSTER",
+        "CLOUD_STORAGE_VOLUME",
+        "CLOUD_APP_CUSTOM",
+        "CLOUD_DATABASE_REDIS",
+        "CLOUD_FUNCTION_LAMBDA"
+      ],
+      "default": "CLOUD_TYPE_UNSPECIFIED"
+    },
+    "servicesInterval": {
+      "type": "string",
+      "enum": [
+        "UNDEFINED",
+        "HOURLY",
+        "DAILY",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ],
+      "default": "UNDEFINED"
+    },
+    "servicesItemLimit": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "enforceRestriction": {
+          "type": "boolean"
+        }
+      }
+    },
+    "servicesNetworkLimits": {
+      "type": "object",
+      "properties": {
+        "maxGiB": {
+          "$ref": "#/definitions/servicesItemLimit"
+        },
+        "maxTenants": {
+          "$ref": "#/definitions/servicesItemLimit"
+        },
+        "maxNetworks": {
+          "$ref": "#/definitions/servicesItemLimit"
+        },
+        "maxSubnets": {
+          "$ref": "#/definitions/servicesItemLimit"
+        },
+        "maxNodes": {
+          "$ref": "#/definitions/servicesItemLimit"
+        }
+      }
+    },
+    "servicesPrice": {
+      "type": "object",
+      "properties": {
+        "serviceID": {
+          "type": "string"
+        },
+        "pricingPlanID": {
+          "type": "string"
+        },
+        "resourceUnitID": {
+          "type": "string"
+        },
+        "providerID": {
+          "type": "string"
+        },
+        "productID": {
+          "type": "string",
+          "title": "naming convention: providerPrefix_providerProductName"
+        },
+        "priceID": {
+          "type": "string",
+          "title": "naming convention: providerPrefix_providerPriceName"
+        },
+        "stripeProductID": {
+          "type": "string"
+        },
+        "stripePriceID": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "unitAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "US dollar cents"
+        },
+        "unitAmountDecimal": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/definitions/servicesPriceType"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/servicesInterval"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicesPriceType": {
+      "type": "string",
+      "enum": [
+        "ONE_TIME",
+        "RECURRING"
+      ],
+      "default": "ONE_TIME"
+    },
+    "servicesPricingModel": {
+      "type": "string",
+      "enum": [
+        "PRICING_FREE",
+        "PRICING_CUSTOM",
+        "PRICING_FIXED",
+        "PRICING_HOURLY",
+        "PRICING_DAILY",
+        "PRICING_WEEKLY",
+        "PRICING_MONTHLY",
+        "PRICING_YEARLY"
+      ],
+      "default": "PRICING_FREE"
+    },
+    "servicesPricingPlan": {
+      "type": "object",
+      "properties": {
+        "serviceID": {
+          "type": "string"
+        },
+        "pricingPlanID": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unitLabel": {
+          "type": "string"
+        },
+        "stripeProductID": {
+          "type": "string"
+        },
+        "prices": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/servicesPrice"
+          },
+          "title": "map[stripePriceRecurringInterval]*Price"
+        },
+        "resources": {
+          "$ref": "#/definitions/servicesResources"
+        },
+        "networkLimits": {
+          "$ref": "#/definitions/servicesNetworkLimits",
+          "title": "ServiceLimits serviceLimits = 72;\n OtherLimits otherLimits = 73;"
+        },
+        "included3rdPartyServices": {
+          "type": "boolean"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicesPricingPlans": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "pricingPlans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicesPricingPlan"
+          }
+        }
+      }
+    },
+    "servicesProduct": {
+      "type": "object",
+      "properties": {
+        "serviceID": {
+          "type": "string"
+        },
+        "providerID": {
+          "type": "string",
+          "title": "== accountID since mmesh customers can be external providers"
+        },
+        "productID": {
+          "type": "string",
+          "title": "naming convention: providerPrefix_providerProductName"
+        },
+        "stripeProductID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unitLabel": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "pricingModel": {
+          "$ref": "#/definitions/servicesPricingModel"
+        },
+        "priceFixed": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceHourly": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceDaily": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceWeekly": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceMonthly": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceYearly": {
+          "type": "number",
+          "format": "double"
+        },
+        "SLA": {
+          "$ref": "#/definitions/servicesProductSLA",
+          "description": "managed tasks (uber-style): incidents, changes, maintenance..."
+        },
+        "class": {
+          "$ref": "#/definitions/servicesProductClass"
+        },
+        "cloudCategory": {
+          "$ref": "#/definitions/servicesCloudCategory"
+        },
+        "cloudType": {
+          "$ref": "#/definitions/servicesCloudType"
+        },
+        "serviceCategory": {
+          "$ref": "#/definitions/servicesServiceCategory"
+        },
+        "serviceType": {
+          "$ref": "#/definitions/servicesServiceType"
+        },
+        "serviceScope": {
+          "$ref": "#/definitions/servicesServiceScope"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "langs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "opMgrs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "salesReps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicesProductClass": {
+      "type": "string",
+      "enum": [
+        "CLASS_UNSPECIFIED",
+        "CLASS_CLOUD",
+        "CLASS_SERVICE"
+      ],
+      "default": "CLASS_UNSPECIFIED"
+    },
+    "servicesProductSLA": {
+      "type": "string",
+      "enum": [
+        "BEST_EFFORT",
+        "BASIC",
+        "PLUS",
+        "BUSINESS",
+        "ENTERPRISE"
+      ],
+      "default": "BEST_EFFORT"
+    },
+    "servicesProducts": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicesProduct"
+          }
+        }
+      }
+    },
+    "servicesProvider": {
+      "type": "object",
+      "properties": {
+        "serviceID": {
+          "type": "string"
+        },
+        "providerID": {
+          "type": "string",
+          "title": "== accountID since mmesh customers can be external providers"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "3-letter prefix:\nmcp (mmesh cloud platform), scw (scaleway), lnd (linode), dgo (digitalOcean)..."
+        },
+        "isCustomer": {
+          "type": "boolean",
+          "title": "mmesh customers can be external service providers"
+        },
+        "type": {
+          "$ref": "#/definitions/servicesProviderType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "websiteURL": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "supportChannels": {
+          "$ref": "#/definitions/servicesSupportChannels"
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "servicesProviderType": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "CLOUD",
+        "PROFESSIONAL_SERVICES"
+      ],
+      "default": "UNSPECIFIED"
+    },
+    "servicesProviders": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicesProvider"
+          }
+        }
+      }
+    },
+    "servicesResourceUnit": {
+      "type": "object",
+      "properties": {
+        "serviceID": {
+          "type": "string"
+        },
+        "resourceUnitID": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "stripeProductID": {
+          "type": "string"
+        },
+        "prices": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/servicesPrice"
+          },
+          "title": "map[stripePriceRecurringInterval]*Price"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicesResourceUnits": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "resourceUnits": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicesResourceUnit"
+          }
+        }
+      }
+    },
+    "servicesResources": {
+      "type": "object",
+      "properties": {
+        "discount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "user": {
+          "$ref": "#/definitions/servicesUnit"
+        },
+        "tenant": {
+          "$ref": "#/definitions/servicesUnit"
+        },
+        "network": {
+          "$ref": "#/definitions/servicesUnit"
+        },
+        "subnet": {
+          "$ref": "#/definitions/servicesUnit"
+        },
+        "node": {
+          "$ref": "#/definitions/servicesUnit"
+        }
+      }
+    },
+    "servicesServiceCategory": {
+      "type": "string",
+      "enum": [
+        "SERVICE_UNSPECIFIED",
+        "SERVICE_ADVISORY_SERVICE",
+        "SERVICE_MANAGED_SERVICE",
+        "SERVICE_INFRASTRUCTURE_PROJECT",
+        "SERVICE_AUTOMATION_PROJECT",
+        "SERVICE_SOFTWARE_DEVELOPMENT",
+        "SERVICE_PROJECT_MANAGEMENT",
+        "SERVICE_SPECIAL_PROJECT",
+        "SERVICE_SPECIAL_TASK"
+      ],
+      "default": "SERVICE_UNSPECIFIED",
+      "title": "- SERVICE_ADVISORY_SERVICE: consulting services\n - SERVICE_MANAGED_SERVICE: managed services\n - SERVICE_INFRASTRUCTURE_PROJECT: cloud migration, infra modernization, networkarch.\n - SERVICE_AUTOMATION_PROJECT: automation project\n - SERVICE_SOFTWARE_DEVELOPMENT: software project\n - SERVICE_PROJECT_MANAGEMENT: project management\n - SERVICE_SPECIAL_PROJECT: special project\n - SERVICE_SPECIAL_TASK: special task (help during emergency or incident response)"
+    },
+    "servicesServiceScope": {
+      "type": "string",
+      "enum": [
+        "SCOPE_UNDEFINED",
+        "SCOPE_ALL",
+        "SCOPE_DESIGN",
+        "SCOPE_IMPLEMENTATION",
+        "SCOPE_MAINTENANCE",
+        "SCOPE_SUPPORT"
+      ],
+      "default": "SCOPE_UNDEFINED"
+    },
+    "servicesServiceType": {
+      "type": "string",
+      "enum": [
+        "SERVICE_TYPE_UNSPECIFIED",
+        "SERVICE_ADVISORY_SERVICE_ARCHITECTURE",
+        "SERVICE_ADVISORY_SERVICE_SUPPORT",
+        "SERVICE_MANAGED_SERVICE_CLOUD",
+        "SERVICE_MANAGED_SERVICE_ONPREM",
+        "SERVICE_MANAGED_SERVICE_INFRASTRUCTURE_MAINTENANCE",
+        "SERVICE_MANAGED_SERVICE_SOFTWARE_MAINTENANCE",
+        "SERVICE_INFRASTRUCTURE_PROJECT_NETWORK",
+        "SERVICE_INFRASTRUCTURE_PROJECT_CLOUD",
+        "SERVICE_INFRASTRUCTURE_PROJECT_ONPREM",
+        "SERVICE_INFRASTRUCTURE_PROJECT_MIGRATION",
+        "SERVICE_AUTOMATION_PROJECT_SIMPLE",
+        "SERVICE_AUTOMATION_PROJECT_COMPLEX",
+        "SERVICE_SOFTWARE_DEVELOPMENT_SIMPLE",
+        "SERVICE_SOFTWARE_DEVELOPMENT_COMPLEX",
+        "SERVICE_SOFTWARE_DEVELOPMENT_SUPPORT",
+        "SERVICE_SOFTWARE_DEVELOPMENT_MAINTENANCE",
+        "SERVICE_SOFTWARE_DEVELOPMENT_FEATURE_REQUEST",
+        "SERVICE_PROJECT_MANAGEMENT_SIMPLE",
+        "SERVICE_PROJECT_MANAGEMENT_COMPLEX",
+        "SERVICE_SPECIAL_PROJECT_SIMPLE",
+        "SERVICE_SPECIAL_PROJECT_COMPLEX",
+        "SERVICE_SPECIAL_TASK_SIMPLE",
+        "SERVICE_SPECIAL_TASK_COMPLEX",
+        "SERVICE_SPECIAL_TASK_INCIDENT_RESPONSE",
+        "SERVICE_SPECIAL_TASK_SECURITY_ASSESSMENT",
+        "SERVICE_SPECIAL_TASK_HEALTH_CHECKING",
+        "SERVICE_SPECIAL_TASK_COMPLIANCE_ASSESSMENT"
+      ],
+      "default": "SERVICE_TYPE_UNSPECIFIED",
+      "description": " - SERVICE_MANAGED_SERVICE_CLOUD: monitoring, alerting, backup..\n - SERVICE_MANAGED_SERVICE_ONPREM: monitoring, alerting, backup..\n - SERVICE_MANAGED_SERVICE_INFRASTRUCTURE_MAINTENANCE: upgrades, patches..\n - SERVICE_MANAGED_SERVICE_SOFTWARE_MAINTENANCE: upgrades, patches..\n - SERVICE_INFRASTRUCTURE_PROJECT_NETWORK: design, build network\n - SERVICE_INFRASTRUCTURE_PROJECT_CLOUD: design, build network, VM, container (mongodb, jenkins..)\n - SERVICE_INFRASTRUCTURE_PROJECT_ONPREM: design, build network, VM, container (mongodb, jenkins..)\n - SERVICE_SOFTWARE_DEVELOPMENT_MAINTENANCE: upgrades, patches..\n - SERVICE_SOFTWARE_DEVELOPMENT_FEATURE_REQUEST: new features, integrations\n - SERVICE_SPECIAL_TASK_SECURITY_ASSESSMENT: security \u0026 virus scans, reports.."
+    },
+    "servicesSupportChannels": {
+      "type": "object",
+      "properties": {
+        "slack": {
+          "type": "boolean"
+        },
+        "slackChannel": {
+          "type": "string",
+          "title": "slack channel at m-gate org"
+        }
+      },
+      "title": "bool crisp = 1;"
+    },
+    "servicesUnit": {
+      "type": "object",
+      "properties": {
+        "includedUnits": {
+          "type": "string",
+          "format": "int64",
+          "title": "int64 listPrice = 11;"
+        }
+      }
+    },
+    "statusStatusCode": {
+      "type": "string",
+      "enum": [
+        "UNDEFINED",
+        "OK",
+        "CANCELED",
+        "INTERRUPTED",
+        "INCOMPLETE",
+        "SUSPENDED",
+        "FAILED"
+      ],
+      "default": "UNDEFINED"
+    },
+    "statusStatusResponse": {
+      "type": "object",
+      "properties": {
+        "sourceID": {
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/definitions/statusStatusCode"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

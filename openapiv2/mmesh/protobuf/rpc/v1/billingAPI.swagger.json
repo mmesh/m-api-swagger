@@ -1,0 +1,1647 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mmesh/protobuf/rpc/v1/billingAPI.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BillingAPI"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/accounts/{accountID}/billing/invoices": {
+      "get": {
+        "summary": "invoice\n  rpc NewInvoice(billing.Invoice) returns (billing.Invoice) {\n    option (google.api.http) = {\n      post: \"/api/v1/accounts/{accountID}/billing/invoices\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "BillingAPI_ListInvoices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoices"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meta.pageToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "meta.pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/billing/invoices/{invoiceID}": {
+      "get": {
+        "operationId": "BillingAPI_GetInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invoiceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pricingPlanID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerEmail",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeCustomerID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeInvoiceID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeSubscriptionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "autoAdvance",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "amountDue",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "amountPaid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "amountRemaining",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "startingBalance",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "endingBalance",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "attempted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "paid",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "deleted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "attemptCount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "nextPaymentAttempt",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "subtotal",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "tax",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "total",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "totalDiscount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "invoiceNumber",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "receiptNumber",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "statementDescriptor",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hostedInvoiceURL",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "invoicePDF",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "periodStart",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "periodEnd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "dueDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "trialEndDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "trialPeriod",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "status",
+            "description": "stripe invoice.status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentIntentStatus",
+            "description": "stripe payment_intent.status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionInvoice",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "items",
+            "description": "map[itemID]*InvoiceItem\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      },
+      "delete": {
+        "summary": "rpc SetInvoice(billing.Invoice) returns (billing.Invoice) {\n    option (google.api.http) = {\n      post: \"/api/v1/accounts/{accountID}/billing/invoices/{invoiceID}\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "BillingAPI_DeleteInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invoiceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pricingPlanID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerEmail",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeCustomerID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeInvoiceID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeSubscriptionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "autoAdvance",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "amountDue",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "amountPaid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "amountRemaining",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "startingBalance",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "endingBalance",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "attempted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "paid",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "deleted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "attemptCount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "nextPaymentAttempt",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "subtotal",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "tax",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "total",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "totalDiscount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "invoiceNumber",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "receiptNumber",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "statementDescriptor",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hostedInvoiceURL",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "invoicePDF",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "periodStart",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "periodEnd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "dueDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "trialEndDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "trialPeriod",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "status",
+            "description": "stripe invoice.status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentIntentStatus",
+            "description": "stripe payment_intent.status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionInvoice",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "items",
+            "description": "map[itemID]*InvoiceItem\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/billing/items": {
+      "get": {
+        "summary": "billed-item\n  rpc NewBilledItem(billing.InvoiceItem) returns (billing.InvoiceItem) {\n    option (google.api.http) = {\n      post: \"/api/v1/accounts/{accountID}/billing/items\"\n      body: \"*\"\n    };\n  }",
+        "operationId": "BillingAPI_ListBilledItems",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoiceItems"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meta.pageToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "meta.pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/billing/items/{itemID}": {
+      "get": {
+        "operationId": "BillingAPI_GetBilledItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoiceItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemID",
+            "description": "resource UUID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stripeCustomerID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "description": "yyyyMMhhmmss-yyyyMMhhmmss",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "providerID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeSubscriptionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeInvoiceID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "stripeProductID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "productID",
+            "description": "strings.ToLower(resource.Kind)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "productName",
+            "description": "\"Resource Unit: Kind\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "shortDescription",
+            "description": "\"Kind: Metadata.Name\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "longDescription",
+            "description": "\"Kind: ObjKey\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "description": "US dollar cents (amount charged)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "currency",
+            "description": "it takes the currency from parent invoice",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unitPrice",
+            "description": "[metadata] US dollar cents (discount NOT included)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "discount",
+            "description": "[metadata] pricing-plan discount",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "priceWithDiscount",
+            "description": "[metadata] US dollar cents (discount included)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creationDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "cancelationDate",
+            "description": "bool cancelAtPeriodEnd = 53;",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "periodStart",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "periodEnd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastPeriodStart",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastPeriodEnd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lastModified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RESOURCE_UNIT",
+              "IAAS"
+            ],
+            "default": "RESOURCE_UNIT"
+          },
+          {
+            "name": "preview",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "billed",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/billing:portal": {
+      "post": {
+        "operationId": "BillingAPI_GetCustomerPortal",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingCustomerPortalResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customerID": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/subscription:promotion": {
+      "post": {
+        "summary": "subscription",
+        "operationId": "BillingAPI_ApplyPromotion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stripeSubscriptionID": {
+                  "type": "string"
+                },
+                "promotionCode": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    },
+    "/api/v1/customers:search": {
+      "post": {
+        "summary": "customer",
+        "operationId": "BillingAPI_SearchCustomer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statusSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCustomer"
+            }
+          }
+        ],
+        "tags": [
+          "BillingAPI"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "billingAddress": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "title": "ISO 3166-1 alpha-2 code"
+        }
+      }
+    },
+    "billingCard": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "funding": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "expMonth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "expYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cvcCheck": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "threeDsecure": {
+          "type": "string"
+        }
+      }
+    },
+    "billingCustomer": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "stripeCustomerID": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/billingAddress"
+        },
+        "description": {
+          "type": "string"
+        },
+        "stripeDefaultPaymentMethod": {
+          "$ref": "#/definitions/billingPaymentMethod",
+          "title": "repeated PaymentMethod stripePaymentSources = 31;"
+        },
+        "tax": {
+          "$ref": "#/definitions/billingCustomerTax"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "string",
+          "format": "int64"
+        },
+        "delinquent": {
+          "type": "boolean"
+        },
+        "hostedInvoiceURL": {
+          "type": "string",
+          "title": "string checkoutSessionID = 52;"
+        },
+        "liveMode": {
+          "type": "boolean"
+        },
+        "stripeTestClockID": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "billingCustomerPortalResponse": {
+      "type": "object",
+      "properties": {
+        "URL": {
+          "type": "string"
+        }
+      }
+    },
+    "billingCustomerTax": {
+      "type": "object",
+      "properties": {
+        "automaticTax": {
+          "type": "string"
+        },
+        "IPAddress": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/billingTaxLocation"
+        }
+      }
+    },
+    "billingInvoice": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "invoiceID": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "serviceID": {
+          "type": "string"
+        },
+        "pricingPlanID": {
+          "type": "string"
+        },
+        "customerEmail": {
+          "type": "string"
+        },
+        "stripeCustomerID": {
+          "type": "string"
+        },
+        "stripeInvoiceID": {
+          "type": "string"
+        },
+        "stripeSubscriptionID": {
+          "type": "string"
+        },
+        "autoAdvance": {
+          "type": "boolean"
+        },
+        "amountDue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "amountPaid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "amountRemaining": {
+          "type": "string",
+          "format": "int64"
+        },
+        "startingBalance": {
+          "type": "string",
+          "format": "int64"
+        },
+        "endingBalance": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attempted": {
+          "type": "boolean"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "attemptCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nextPaymentAttempt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "subtotal": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tax": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalDiscount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "invoiceNumber": {
+          "type": "string"
+        },
+        "receiptNumber": {
+          "type": "string"
+        },
+        "statementDescriptor": {
+          "type": "string"
+        },
+        "hostedInvoiceURL": {
+          "type": "string"
+        },
+        "invoicePDF": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "period": {
+          "type": "string"
+        },
+        "periodStart": {
+          "type": "string",
+          "format": "int64"
+        },
+        "periodEnd": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "trialEndDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "trialPeriod": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "title": "stripe invoice.status"
+        },
+        "paymentIntentStatus": {
+          "type": "string",
+          "title": "stripe payment_intent.status"
+        },
+        "subscriptionInvoice": {
+          "type": "boolean"
+        },
+        "summaryItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingInvoiceItem"
+          }
+        },
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/billingInvoiceItem"
+          },
+          "title": "map[itemID]*InvoiceItem"
+        }
+      }
+    },
+    "billingInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "stripeCustomerID": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string",
+          "title": "yyyyMMhhmmss-yyyyMMhhmmss"
+        },
+        "serviceID": {
+          "type": "string"
+        },
+        "providerID": {
+          "type": "string"
+        },
+        "stripeSubscriptionID": {
+          "type": "string"
+        },
+        "stripeInvoiceID": {
+          "type": "string"
+        },
+        "stripeProductID": {
+          "type": "string"
+        },
+        "itemID": {
+          "type": "string",
+          "title": "resource UUID"
+        },
+        "productID": {
+          "type": "string",
+          "title": "strings.ToLower(resource.Kind)"
+        },
+        "productName": {
+          "type": "string",
+          "title": "\"Resource Unit: Kind\""
+        },
+        "shortDescription": {
+          "type": "string",
+          "title": "\"Kind: Metadata.Name\""
+        },
+        "longDescription": {
+          "type": "string",
+          "title": "\"Kind: ObjKey\""
+        },
+        "category": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64",
+          "title": "US dollar cents (amount charged)"
+        },
+        "currency": {
+          "type": "string",
+          "title": "it takes the currency from parent invoice"
+        },
+        "unitPrice": {
+          "type": "string",
+          "title": "[metadata] US dollar cents (discount NOT included)"
+        },
+        "discount": {
+          "type": "string",
+          "title": "[metadata] pricing-plan discount"
+        },
+        "priceWithDiscount": {
+          "type": "string",
+          "title": "[metadata] US dollar cents (discount included)"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cancelationDate": {
+          "type": "string",
+          "format": "int64",
+          "title": "bool cancelAtPeriodEnd = 53;"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "periodStart": {
+          "type": "string",
+          "format": "int64"
+        },
+        "periodEnd": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastPeriodStart": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastPeriodEnd": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "class": {
+          "$ref": "#/definitions/billingItemClass"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "billed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "billingInvoiceItems": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "invoiceItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingInvoiceItem"
+          }
+        }
+      }
+    },
+    "billingInvoices": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListResponse"
+        },
+        "invoices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingInvoice"
+          }
+        }
+      }
+    },
+    "billingItemClass": {
+      "type": "string",
+      "enum": [
+        "RESOURCE_UNIT",
+        "IAAS"
+      ],
+      "default": "RESOURCE_UNIT"
+    },
+    "billingPaymentMethod": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "card": {
+          "$ref": "#/definitions/billingCard"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "billingTaxLocation": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "type": "string",
+          "title": "data source used to infer the customer's location"
+        },
+        "Country": {
+          "type": "string",
+          "title": "customer's country as identified by Stripe Tax"
+        },
+        "State": {
+          "type": "string",
+          "title": "customer's state, county, province, or region as"
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "resourceListRequest": {
+      "type": "object",
+      "properties": {
+        "pageToken": {
+          "type": "string"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "resourceListResponse": {
+      "type": "object",
+      "properties": {
+        "nextPageToken": {
+          "type": "string"
+        }
+      }
+    },
+    "statusSearchResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "statusStatusCode": {
+      "type": "string",
+      "enum": [
+        "UNDEFINED",
+        "OK",
+        "CANCELED",
+        "INTERRUPTED",
+        "INCOMPLETE",
+        "SUSPENDED",
+        "FAILED"
+      ],
+      "default": "UNDEFINED"
+    },
+    "statusStatusResponse": {
+      "type": "object",
+      "properties": {
+        "sourceID": {
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/definitions/statusStatusCode"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}
