@@ -29,6 +29,7 @@
   "paths": {
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}": {
       "get": {
+        "summary": "Gets a network.",
         "operationId": "TopologyAPI_GetNetwork",
         "responses": {
           "200": {
@@ -69,6 +70,7 @@
         ]
       },
       "delete": {
+        "summary": "Deletes a network.",
         "operationId": "TopologyAPI_DeleteNetwork",
         "responses": {
           "200": {
@@ -109,6 +111,7 @@
         ]
       },
       "patch": {
+        "summary": "Updates a network.",
         "operationId": "TopologyAPI_UpdateNetwork",
         "responses": {
           "200": {
@@ -168,6 +171,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets/{subnetID}": {
       "get": {
+        "summary": "Gets a subnet.",
         "operationId": "TopologyAPI_GetSubnet",
         "responses": {
           "200": {
@@ -214,6 +218,7 @@
         ]
       },
       "delete": {
+        "summary": "Deletes a subnet.",
         "operationId": "TopologyAPI_DeleteSubnet",
         "responses": {
           "200": {
@@ -260,6 +265,7 @@
         ]
       },
       "patch": {
+        "summary": "Updates a subnet.",
         "operationId": "TopologyAPI_UpdateSubnet",
         "responses": {
           "200": {
@@ -325,7 +331,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets/{subnetID}/policy": {
       "get": {
-        "summary": "network security policies",
+        "summary": "Gets subnet security policy.",
         "operationId": "TopologyAPI_GetNetworkPolicy",
         "responses": {
           "200": {
@@ -372,6 +378,7 @@
         ]
       },
       "delete": {
+        "summary": "Deletes subnet security policy.",
         "operationId": "TopologyAPI_DeleteNetworkPolicy",
         "responses": {
           "200": {
@@ -420,6 +427,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets/{subnetID}:ipam-entry": {
       "post": {
+        "summary": "Removes an IPAM entry from a subnet.",
         "operationId": "TopologyAPI_RemoveSubnetIPAMEntry",
         "responses": {
           "200": {
@@ -484,7 +492,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks/{netID}/subnets:new": {
       "post": {
-        "summary": "subnets",
+        "summary": "Creates a subnet.",
         "operationId": "TopologyAPI_CreateSubnet",
         "responses": {
           "200": {
@@ -550,7 +558,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/networks:new": {
       "post": {
-        "summary": "networks",
+        "summary": "Creates a network.",
         "operationId": "TopologyAPI_CreateNetwork",
         "responses": {
           "200": {
@@ -610,6 +618,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}": {
       "get": {
+        "summary": "Gets a node.",
         "operationId": "TopologyAPI_GetNode",
         "responses": {
           "200": {
@@ -650,7 +659,7 @@
         ]
       },
       "delete": {
-        "summary": "rpc UpdateNodeCfg (topology.UpdateNodeCfgRequest) returns (topology.Node) {\n    option (google.api.http) = {\n      patch: \"/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/networks/{nodeReq.netID}/subnets/{nodeReq.subnetID}/nodes/{nodeReq.nodeID}:cfg\"\n      body: \"*\"\n    };\n  }",
+        "summary": "Removes a node from the database.",
         "operationId": "TopologyAPI_DeleteNode",
         "responses": {
           "200": {
@@ -693,7 +702,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:metrics": {
       "get": {
-        "summary": "nodeMetrics",
+        "summary": "Gets node metrics.",
         "operationId": "TopologyAPI_GetNodeMetrics",
         "responses": {
           "200": {
@@ -736,7 +745,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes:new": {
       "post": {
-        "summary": "nodes",
+        "summary": "Creates a node.",
         "operationId": "TopologyAPI_CreateGenericNode",
         "responses": {
           "200": {
@@ -812,7 +821,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}:topology": {
       "get": {
-        "summary": "topology",
+        "summary": "Get topology data (deprecated).",
         "operationId": "TopologyAPI_GetTopology",
         "responses": {
           "200": {
@@ -849,6 +858,7 @@
     },
     "/api/v1/accounts/{network.accountID}/tenants/{network.tenantID}/networks/{network.netID}/subnets": {
       "post": {
+        "summary": "Lists subnets in a network.",
         "operationId": "TopologyAPI_ListSubnets",
         "responses": {
           "200": {
@@ -907,6 +917,7 @@
     },
     "/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/nodes/{nodeReq.nodeID}:management": {
       "patch": {
+        "summary": "Updates node management configuration.",
         "operationId": "TopologyAPI_UpdateNodeManagement",
         "responses": {
           "200": {
@@ -974,6 +985,7 @@
     },
     "/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/nodes/{nodeReq.nodeID}:metadata": {
       "patch": {
+        "summary": "Updates node metadata.",
         "operationId": "TopologyAPI_UpdateNodeMetadata",
         "responses": {
           "200": {
@@ -1035,6 +1047,7 @@
     },
     "/api/v1/accounts/{nodeReq.accountID}/tenants/{nodeReq.tenantID}/nodes/{nodeReq.nodeID}:networking": {
       "patch": {
+        "summary": "Updates node networking configuration.",
         "operationId": "TopologyAPI_UpdateNodeNetworking",
         "responses": {
           "200": {
@@ -1103,6 +1116,7 @@
     },
     "/api/v1/accounts/{subnet.accountID}/tenants/{subnet.tenantID}/networks/{subnet.netID}/subnets/{subnet.subnetID}/nodes": {
       "post": {
+        "summary": "Lists nodes by subnet.",
         "operationId": "TopologyAPI_ListNodesBySubnet",
         "responses": {
           "200": {
@@ -1167,7 +1181,7 @@
     },
     "/api/v1/accounts/{subnetReq.accountID}/tenants/{subnetReq.tenantID}/networks/{subnetReq.netID}/subnets/{subnetReq.subnetID}/policy": {
       "post": {
-        "summary": "network security policies: network filters",
+        "summary": "Creates a network filter in the subnet security policy.",
         "operationId": "TopologyAPI_CreateNetworkFilter",
         "responses": {
           "200": {
@@ -1254,6 +1268,7 @@
     },
     "/api/v1/accounts/{subnetReq.accountID}/tenants/{subnetReq.tenantID}/networks/{subnetReq.netID}/subnets/{subnetReq.subnetID}/policy/{nfID}": {
       "delete": {
+        "summary": "Deletes a network filter in the subnet security policy.",
         "operationId": "TopologyAPI_DeleteNetworkFilter",
         "responses": {
           "200": {
@@ -1306,6 +1321,7 @@
         ]
       },
       "put": {
+        "summary": "Updates a network filter in the subnet security policy.",
         "operationId": "TopologyAPI_UpdateNetworkFilter",
         "responses": {
           "200": {
@@ -1398,6 +1414,7 @@
     },
     "/api/v1/accounts/{tenant.accountID}/tenants/{tenant.tenantID}/networks": {
       "post": {
+        "summary": "Lists networks in a tenant.",
         "operationId": "TopologyAPI_ListNetworks",
         "responses": {
           "200": {
@@ -1450,6 +1467,7 @@
     },
     "/api/v1/accounts/{tenant.accountID}/tenants/{tenant.tenantID}/nodes": {
       "post": {
+        "summary": "Lists nodes by tenant.",
         "operationId": "TopologyAPI_ListNodesByTenant",
         "responses": {
           "200": {

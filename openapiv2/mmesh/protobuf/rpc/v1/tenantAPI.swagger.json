@@ -29,6 +29,7 @@
   "paths": {
     "/api/v1/accounts/{accountID}/tenants": {
       "post": {
+        "summary": "Lists account tenants.",
         "operationId": "TenantAPI_ListTenants",
         "responses": {
           "200": {
@@ -72,6 +73,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants/{tenantID}": {
       "get": {
+        "summary": "Gets a tenant.",
         "operationId": "TenantAPI_GetTenant",
         "responses": {
           "200": {
@@ -106,6 +108,7 @@
         ]
       },
       "delete": {
+        "summary": "Deletes a tenant.",
         "operationId": "TenantAPI_DeleteTenant",
         "responses": {
           "200": {
@@ -140,6 +143,7 @@
         ]
       },
       "patch": {
+        "summary": "Updates a tenant.",
         "operationId": "TenantAPI_UpdateTenant",
         "responses": {
           "200": {
@@ -192,7 +196,7 @@
     },
     "/api/v1/accounts/{accountID}/tenants:new": {
       "post": {
-        "summary": "tenants",
+        "summary": "Creates a tenant.",
         "operationId": "TenantAPI_CreateTenant",
         "responses": {
           "200": {
@@ -239,7 +243,7 @@
     },
     "/api/v1/accounts/{accountID}:tenants": {
       "get": {
-        "summary": "tenantList",
+        "summary": "Gets tenant list.",
         "operationId": "TenantAPI_GetTenantList",
         "responses": {
           "200": {
