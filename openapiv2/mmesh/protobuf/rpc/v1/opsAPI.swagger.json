@@ -1,13 +1,24 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "mmesh/protobuf/rpc/v1/opsAPI.proto",
-    "version": "version not set"
+    "title": "mmesh-ops-api",
+    "version": "1.0",
+    "contact": {
+      "name": "mmesh-api",
+      "url": "https://github.com/mmesh/m-api"
+    },
+    "license": {
+      "name": "Apache-2.0 License",
+      "url": "https://github.com/mmesh/m-api/blob/master/LICENSE"
+    }
   },
   "tags": [
     {
       "name": "OpsAPI"
     }
+  ],
+  "schemes": [
+    "https"
   ],
   "consumes": [
     "application/json"
