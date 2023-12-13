@@ -700,15 +700,187 @@
         ]
       }
     },
-    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:metrics": {
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:host-metrics": {
       "get": {
-        "summary": "Gets node metrics.",
-        "operationId": "TopologyAPI_GetNodeMetrics",
+        "summary": "Gets node hostMetrics.",
+        "operationId": "TopologyAPI_GetNodeHostMetrics",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/tssNodeMetrics"
+              "$ref": "#/definitions/metricsdbHostMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:host-security": {
+      "get": {
+        "summary": "Gets node hostSecurityReport.",
+        "operationId": "TopologyAPI_GetNodeHostSecurityReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hsecdbHostSecurityReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:net-ct-log": {
+      "get": {
+        "summary": "Gets node netConntrackLog.",
+        "operationId": "TopologyAPI_GetNodeNetCtLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/netdbConntrackLogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:net-ct-state": {
+      "get": {
+        "summary": "Gets node netConntrackState.",
+        "operationId": "TopologyAPI_GetNodeNetCtState",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/netdbConntrackTableResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TopologyAPI"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountID}/tenants/{tenantID}/nodes/{nodeID}:net-traffic": {
+      "get": {
+        "summary": "Gets node netTrafficMetrics.",
+        "operationId": "TopologyAPI_GetNodeNetTrafficMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/netdbTrafficMetricsResponse"
             }
           },
           "default": {
@@ -1577,6 +1749,948 @@
         }
       }
     },
+    "hsecBOMMetadata": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        },
+        "component": {
+          "$ref": "#/definitions/hsecComponent"
+        }
+      }
+    },
+    "hsecBuildInfo": {
+      "type": "object",
+      "properties": {
+        "contentSets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nvr": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        }
+      }
+    },
+    "hsecCauseMetadata": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "startLine": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "endLine": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "$ref": "#/definitions/hsecCode"
+        },
+        "ocurrences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecOcurrence"
+          }
+        }
+      }
+    },
+    "hsecCode": {
+      "type": "object",
+      "properties": {
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecLine"
+          }
+        }
+      }
+    },
+    "hsecComponent": {
+      "type": "object",
+      "properties": {
+        "BOMRef": {
+          "type": "string"
+        },
+        "MIMEType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "title": "ComponentType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "packageURL": {
+          "type": "string"
+        }
+      }
+    },
+    "hsecConfig": {
+      "type": "object",
+      "properties": {
+        "attachStderr": {
+          "type": "boolean"
+        },
+        "attachStdin": {
+          "type": "boolean"
+        },
+        "attachStdout": {
+          "type": "boolean"
+        },
+        "cmd": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "healthcheck": {
+          "$ref": "#/definitions/hsecHealthConfig"
+        },
+        "domainName": {
+          "type": "string"
+        },
+        "entrypoint": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "onBuild": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "openStdin": {
+          "type": "boolean"
+        },
+        "stdinOnce": {
+          "type": "boolean"
+        },
+        "tty": {
+          "type": "boolean"
+        },
+        "user": {
+          "type": "string"
+        },
+        "volumes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "map[string]struct{}"
+        },
+        "workingDir": {
+          "type": "string"
+        },
+        "exposedPorts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "map[string]struct{}"
+        },
+        "argsEscaped": {
+          "type": "boolean"
+        },
+        "networkDisabled": {
+          "type": "boolean"
+        },
+        "macAddress": {
+          "type": "string"
+        },
+        "stopSignal": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hsecConfigFile": {
+      "type": "object",
+      "properties": {
+        "architecture": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "container": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dockerVersion": {
+          "type": "string"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecHistory"
+          }
+        },
+        "OS": {
+          "type": "string"
+        },
+        "rootFS": {
+          "$ref": "#/definitions/hsecRootFS"
+        },
+        "config": {
+          "$ref": "#/definitions/hsecConfig"
+        },
+        "OSVersion": {
+          "type": "string"
+        },
+        "variant": {
+          "type": "string"
+        },
+        "OSFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hsecCustomResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "layer": {
+          "$ref": "#/definitions/hsecLayer",
+          "title": "interface{} data = 41;"
+        }
+      }
+    },
+    "hsecCycloneDX": {
+      "type": "object",
+      "properties": {
+        "BOMFormat": {
+          "type": "string"
+        },
+        "specVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "metadata": {
+          "$ref": "#/definitions/hsecBOMMetadata"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecComponent"
+          }
+        }
+      }
+    },
+    "hsecDataSource": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "URL": {
+          "type": "string"
+        }
+      }
+    },
+    "hsecDetectedLicense": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "title": "licenseCategory"
+        },
+        "pkgName": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "hsecDetectedMisconfiguration": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "ID": {
+          "type": "string"
+        },
+        "AVDID": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "primaryURL": {
+          "type": "string"
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/hsecMisconfStatus"
+        },
+        "layer": {
+          "$ref": "#/definitions/hsecLayer"
+        },
+        "causeMetadata": {
+          "$ref": "#/definitions/hsecCauseMetadata"
+        },
+        "traces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hsecDetectedVulnerability": {
+      "type": "object",
+      "properties": {
+        "vulnerabilityID": {
+          "type": "string"
+        },
+        "vendorIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pkgID": {
+          "type": "string"
+        },
+        "pkgName": {
+          "type": "string"
+        },
+        "pkgPath": {
+          "type": "string"
+        },
+        "installedVersion": {
+          "type": "string"
+        },
+        "fixedVersion": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/hsecVulnerabilityStatus"
+        },
+        "layer": {
+          "$ref": "#/definitions/hsecLayer"
+        },
+        "severitySource": {
+          "type": "string"
+        },
+        "primaryURL": {
+          "type": "string"
+        },
+        "pkgRef": {
+          "type": "string"
+        },
+        "dataSource": {
+          "$ref": "#/definitions/hsecDataSource"
+        }
+      }
+    },
+    "hsecHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "hex": {
+          "type": "string"
+        }
+      }
+    },
+    "hsecHealthConfig": {
+      "type": "object",
+      "properties": {
+        "test": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Test is the test to perform to check that the container is healthy.\nAn empty slice means to inherit the default.\nThe options are:\n{} : inherit healthcheck\n{\"NONE\"} : disable healthcheck\n{\"CMD\", args...} : exec arguments directly\n{\"CMD-SHELL\", command} : run command with system's default shell"
+        },
+        "interval": {
+          "type": "string",
+          "format": "int64",
+          "description": "Zero means to inherit. Durations are expressed as integer nanoseconds.\nInterval is the time to wait between checks.\n\ntime.Duration"
+        },
+        "timeout": {
+          "type": "string",
+          "format": "int64",
+          "description": "Timeout is the time to wait before considering the check to have hung.\n\ntime.Duration"
+        },
+        "startPeriod": {
+          "type": "string",
+          "format": "int64",
+          "description": "The start period for the container to initialize before the retries starts to count down.\n\ntime.Duration"
+        },
+        "retries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retries is the number of consecutive failures needed to consider a container as unhealthy.\nZero means inherit."
+        }
+      }
+    },
+    "hsecHistory": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "emptyLayer": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hsecLayer": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "type": "string"
+        },
+        "diffID": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        }
+      }
+    },
+    "hsecLine": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "string"
+        },
+        "isCause": {
+          "type": "boolean"
+        },
+        "annotation": {
+          "type": "string"
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "highlighted": {
+          "type": "string"
+        },
+        "firstCause": {
+          "type": "boolean"
+        },
+        "lastCause": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hsecLocation": {
+      "type": "object",
+      "properties": {
+        "startLine": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "endLine": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "hsecMetadata": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "OS": {
+          "$ref": "#/definitions/hsecOS"
+        },
+        "imageID": {
+          "type": "string",
+          "title": "Container Image"
+        },
+        "diffIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "repoTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "repoDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imageConfig": {
+          "$ref": "#/definitions/hsecConfigFile"
+        }
+      }
+    },
+    "hsecMisconfStatus": {
+      "type": "string",
+      "enum": [
+        "MISCONF_STATUS_UNKNOWN",
+        "MISCONF_STATUS_PASSED",
+        "MISCONF_STATUS_FAILURE",
+        "MISCONF_STATUS_EXCEPTION"
+      ],
+      "default": "MISCONF_STATUS_UNKNOWN"
+    },
+    "hsecMisconfSummary": {
+      "type": "object",
+      "properties": {
+        "successes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failures": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "exceptions": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "hsecOS": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "title": "OSType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "EOSL": {
+          "type": "boolean"
+        },
+        "extended": {
+          "type": "boolean",
+          "description": "This field is used for enhanced security maintenance programs such as Ubuntu ESM, Debian Extended LTS."
+        }
+      }
+    },
+    "hsecOcurrence": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/hsecLocation"
+        }
+      }
+    },
+    "hsecPackage": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "epoch": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "dev": {
+          "type": "boolean"
+        },
+        "srcName": {
+          "type": "string"
+        },
+        "srcVersion": {
+          "type": "string"
+        },
+        "srcRelease": {
+          "type": "string"
+        },
+        "srcEpoch": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "licenses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maintainer": {
+          "type": "string"
+        },
+        "modularityLabel": {
+          "type": "string"
+        },
+        "buildInfo": {
+          "$ref": "#/definitions/hsecBuildInfo"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "indirect": {
+          "type": "boolean"
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "layer": {
+          "$ref": "#/definitions/hsecLayer"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "digest": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecLocation"
+          }
+        },
+        "installedFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hsecReport": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "artifactName": {
+          "type": "string"
+        },
+        "artifactType": {
+          "type": "string",
+          "title": "ArtifactType"
+        },
+        "metadata": {
+          "$ref": "#/definitions/hsecMetadata"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecResult"
+          }
+        },
+        "cycloneDX": {
+          "$ref": "#/definitions/hsecCycloneDX",
+          "title": "SBOM"
+        }
+      }
+    },
+    "hsecResult": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "class": {
+          "$ref": "#/definitions/hsecResultClass"
+        },
+        "type": {
+          "type": "string"
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecPackage"
+          }
+        },
+        "vulnerabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecDetectedVulnerability"
+          }
+        },
+        "misconfSummary": {
+          "$ref": "#/definitions/hsecMisconfSummary"
+        },
+        "misconfigurations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecDetectedMisconfiguration"
+          }
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecSecretFinding"
+          }
+        },
+        "licenses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecDetectedLicense"
+          }
+        },
+        "customResources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecCustomResource"
+          }
+        }
+      }
+    },
+    "hsecResultClass": {
+      "type": "string",
+      "enum": [
+        "RESULT_CLASS_UNKNOWN",
+        "RESULT_CLASS_OS_PKGS",
+        "RESULT_CLASS_LANG_PKGS",
+        "RESULT_CLASS_CONFIG",
+        "RESULT_CLASS_SECRET",
+        "RESULT_CLASS_LICENSE",
+        "RESULT_CLASS_LICENSE_FILE",
+        "RESULT_CLASS_CUSTOM"
+      ],
+      "default": "RESULT_CLASS_UNKNOWN"
+    },
+    "hsecRootFS": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "diffIDs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hsecHash"
+          }
+        }
+      }
+    },
+    "hsecSecretFinding": {
+      "type": "object",
+      "properties": {
+        "ruleID": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "title": "secretRuleCategory"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "startLine": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "endLine": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "$ref": "#/definitions/hsecCode"
+        },
+        "match": {
+          "type": "string"
+        },
+        "layer": {
+          "$ref": "#/definitions/hsecLayer"
+        }
+      }
+    },
+    "hsecVulnerabilityStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_UNKNOWN",
+        "STATUS_NOT_AFFECTED",
+        "STATUS_AFFECTED",
+        "STATUS_FIXED",
+        "STATUS_UNDER_INVESTIGATION",
+        "STATUS_WILL_NOT_FIX",
+        "STATUS_FIX_DEFERRED",
+        "STATUS_END_OF_LIFE"
+      ],
+      "default": "STATUS_UNKNOWN"
+    },
+    "hsecdbHostSecurityReportResponse": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "queryID": {
+          "type": "string"
+        },
+        "report": {
+          "$ref": "#/definitions/hsecReport"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "metricsEventMetrics": {
       "type": "object",
       "properties": {
@@ -1653,6 +2767,536 @@
         },
         "diskPressure": {
           "type": "boolean"
+        }
+      }
+    },
+    "metricsdbHostMetrics": {
+      "type": "object",
+      "properties": {
+        "loadAvg": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricsdbTimeValue"
+          }
+        },
+        "cpuUsage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricsdbTimeValue"
+          }
+        },
+        "memUsage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricsdbTimeValue"
+          }
+        },
+        "diskUsage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricsdbTimeValue"
+          }
+        },
+        "netUsage": {
+          "$ref": "#/definitions/metricsdbNetMetrics"
+        }
+      }
+    },
+    "metricsdbHostMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "queryID": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/metricsdbHostMetrics"
+          },
+          "title": "map[TimeRange.String()]*HostMetrics"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "metricsdbNetMetrics": {
+      "type": "object",
+      "properties": {
+        "netRxBytes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricsdbTimeValue"
+          }
+        },
+        "netTxBytes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricsdbTimeValue"
+          }
+        }
+      }
+    },
+    "metricsdbTimeValue": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "netdbAddressFamily": {
+      "type": "string",
+      "enum": [
+        "AF_UNKNOWN",
+        "AF_IP4",
+        "AF_IP6"
+      ],
+      "default": "AF_UNKNOWN"
+    },
+    "netdbConnection": {
+      "type": "object",
+      "properties": {
+        "AF": {
+          "$ref": "#/definitions/netdbAddressFamily"
+        },
+        "srcIP": {
+          "type": "string"
+        },
+        "dstIP": {
+          "type": "string"
+        },
+        "proto": {
+          "$ref": "#/definitions/netdbProtocol",
+          "title": "string dstAddr = 22;"
+        },
+        "srcPort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dstPort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "netdbConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/netdbConnectionStatus"
+        },
+        "firstSeen": {
+          "type": "string",
+          "format": "int64"
+        },
+        "timeout": {
+          "type": "string",
+          "format": "int64"
+        },
+        "originCounter": {
+          "$ref": "#/definitions/netdbTrafficCounter"
+        },
+        "replyCounter": {
+          "$ref": "#/definitions/netdbTrafficCounter"
+        }
+      }
+    },
+    "netdbConnectionStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_UNKNOWN",
+        "STATUS_NEW",
+        "STATUS_ACTIVE",
+        "STATUS_DROPPED"
+      ],
+      "default": "STATUS_UNKNOWN"
+    },
+    "netdbConntrackEntry": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "connection": {
+          "$ref": "#/definitions/netdbConnection"
+        },
+        "state": {
+          "$ref": "#/definitions/netdbConnectionState"
+        }
+      }
+    },
+    "netdbConntrackLogEntry": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "connection": {
+          "$ref": "#/definitions/netdbConnection",
+          "title": "key"
+        },
+        "status": {
+          "$ref": "#/definitions/netdbConnectionStatus",
+          "title": "value"
+        }
+      }
+    },
+    "netdbConntrackLogResponse": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "queryID": {
+          "type": "string"
+        },
+        "ctLog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbConntrackLogEntry"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "netdbConntrackTableResponse": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "queryID": {
+          "type": "string"
+        },
+        "ctTable": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbConntrackEntry"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "netdbProtocol": {
+      "type": "string",
+      "enum": [
+        "PROTO_UNKNOWN",
+        "PROTO_TCP",
+        "PROTO_UDP",
+        "PROTO_ICMP4",
+        "PROTO_ICMP6",
+        "PROTO_GRE",
+        "PROTO_SCTP"
+      ],
+      "default": "PROTO_UNKNOWN"
+    },
+    "netdbTalker": {
+      "type": "object",
+      "properties": {
+        "addr": {
+          "type": "string"
+        },
+        "traffic": {
+          "$ref": "#/definitions/netdbTrafficByDirection"
+        }
+      }
+    },
+    "netdbTimeTrafficValue": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "traffic": {
+          "$ref": "#/definitions/netdbTrafficCounter"
+        }
+      }
+    },
+    "netdbTopTalkers": {
+      "type": "object",
+      "properties": {
+        "talkers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTalker"
+          }
+        }
+      }
+    },
+    "netdbTrafficByDirection": {
+      "type": "object",
+      "properties": {
+        "incoming": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "outgoing": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        }
+      }
+    },
+    "netdbTrafficByL5Port": {
+      "type": "object",
+      "properties": {
+        "other": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "HTTP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "HTTPS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SSH": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "RDP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "DNS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SMTP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SMTPS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "MailSubmission": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "IMAP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "IMAPS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "POP3": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "POP3S": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        }
+      }
+    },
+    "netdbTrafficByProtocol": {
+      "type": "object",
+      "properties": {
+        "unknown": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "TCP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "UDP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "ICMPv4": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "ICMPv6": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "GRE": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SCTP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        }
+      }
+    },
+    "netdbTrafficCounter": {
+      "type": "object",
+      "properties": {
+        "packets": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "bytes": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "netdbTrafficMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "nodeID": {
+          "type": "string"
+        },
+        "queryID": {
+          "type": "string"
+        },
+        "byProtocol": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/netdbTrafficByProtocol"
+          },
+          "title": "map[TimeRange.String()]*TrafficByProtocol"
+        },
+        "byL5Port": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/netdbTrafficByL5Port"
+          },
+          "title": "map[TimeRange.String()]*TrafficByL5Port"
+        },
+        "byDirection": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/netdbTrafficByDirection"
+          },
+          "title": "map[TimeRange.String()]*TrafficByDirection"
+        },
+        "topTalkers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/netdbTopTalkers"
+          },
+          "title": "map[TimeRange.String()]*TopTalkers"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -2510,103 +4154,6 @@
         },
         "metrics": {
           "$ref": "#/definitions/topologyMetrics"
-        }
-      }
-    },
-    "tssHostMetrics": {
-      "type": "object",
-      "properties": {
-        "loadAvg": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/tssTimeValue"
-          }
-        },
-        "cpuUsage": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/tssTimeValue"
-          }
-        },
-        "memUsage": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/tssTimeValue"
-          }
-        },
-        "diskUsage": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/tssTimeValue"
-          }
-        },
-        "netUsage": {
-          "$ref": "#/definitions/tssNetMetrics"
-        }
-      }
-    },
-    "tssNetMetrics": {
-      "type": "object",
-      "properties": {
-        "netRxBytes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/tssTimeValue"
-          }
-        },
-        "netTxBytes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/tssTimeValue"
-          }
-        }
-      }
-    },
-    "tssNodeMetrics": {
-      "type": "object",
-      "properties": {
-        "accountID": {
-          "type": "string"
-        },
-        "tenantID": {
-          "type": "string"
-        },
-        "nodeID": {
-          "type": "string",
-          "title": "string netID = 3;\nstring subnetID = 4;"
-        },
-        "queryID": {
-          "type": "string"
-        },
-        "metrics": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/tssHostMetrics"
-          },
-          "title": "map[TimeRange.String()]*HostMetrics"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "tssTimeValue": {
-      "type": "object",
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
-        },
-        "value": {
-          "type": "number",
-          "format": "double"
         }
       }
     }
