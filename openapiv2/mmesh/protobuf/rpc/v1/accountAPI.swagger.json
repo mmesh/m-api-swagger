@@ -99,7 +99,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -786,6 +786,52 @@
         }
       }
     },
+    "emptyEmpty": {
+      "type": "object"
+    },
+    "eventsEventMetrics": {
+      "type": "object",
+      "properties": {
+        "successCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "failCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "successProbability": {
+          "type": "number",
+          "format": "float"
+        },
+        "failProbability": {
+          "type": "number",
+          "format": "float"
+        },
+        "firstActivity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastActivity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "activityIndex": {
+          "type": "number",
+          "format": "float"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "lastResult": {
+          "$ref": "#/definitions/eventsEventResult"
+        }
+      }
+    },
     "eventsEventResult": {
       "type": "string",
       "enum": [
@@ -855,7 +901,7 @@
           "$ref": "#/definitions/iamUserStats"
         },
         "eventMetrics": {
-          "$ref": "#/definitions/metricsEventMetrics"
+          "$ref": "#/definitions/eventsEventMetrics"
         }
       }
     },
@@ -919,49 +965,6 @@
         }
       }
     },
-    "metricsEventMetrics": {
-      "type": "object",
-      "properties": {
-        "successCount": {
-          "type": "number",
-          "format": "float"
-        },
-        "failCount": {
-          "type": "number",
-          "format": "float"
-        },
-        "successProbability": {
-          "type": "number",
-          "format": "float"
-        },
-        "failProbability": {
-          "type": "number",
-          "format": "float"
-        },
-        "firstActivity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "lastActivity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "activityIndex": {
-          "type": "number",
-          "format": "float"
-        },
-        "score": {
-          "type": "number",
-          "format": "float"
-        },
-        "rating": {
-          "type": "string"
-        },
-        "lastResult": {
-          "$ref": "#/definitions/eventsEventResult"
-        }
-      }
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -988,37 +991,6 @@
       "properties": {
         "nextPageToken": {
           "type": "string"
-        }
-      }
-    },
-    "statusStatusCode": {
-      "type": "string",
-      "enum": [
-        "UNDEFINED",
-        "OK",
-        "CANCELED",
-        "INTERRUPTED",
-        "INCOMPLETE",
-        "SUSPENDED",
-        "FAILED"
-      ],
-      "default": "UNDEFINED"
-    },
-    "statusStatusResponse": {
-      "type": "object",
-      "properties": {
-        "sourceID": {
-          "type": "string"
-        },
-        "code": {
-          "$ref": "#/definitions/statusStatusCode"
-        },
-        "message": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },

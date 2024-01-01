@@ -372,7 +372,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -992,7 +992,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -1039,7 +1039,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusSearchResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -1567,6 +1567,9 @@
         }
       }
     },
+    "emptyEmpty": {
+      "type": "object"
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -1612,45 +1615,6 @@
       "properties": {
         "nextPageToken": {
           "type": "string"
-        }
-      }
-    },
-    "statusSearchResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "boolean"
-        }
-      }
-    },
-    "statusStatusCode": {
-      "type": "string",
-      "enum": [
-        "UNDEFINED",
-        "OK",
-        "CANCELED",
-        "INTERRUPTED",
-        "INCOMPLETE",
-        "SUSPENDED",
-        "FAILED"
-      ],
-      "default": "UNDEFINED"
-    },
-    "statusStatusResponse": {
-      "type": "object",
-      "properties": {
-        "sourceID": {
-          "type": "string"
-        },
-        "code": {
-          "$ref": "#/definitions/statusStatusCode"
-        },
-        "message": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
         }
       }
     }

@@ -339,7 +339,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -625,7 +625,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -1079,6 +1079,9 @@
         }
       }
     },
+    "emptyEmpty": {
+      "type": "object"
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -1416,37 +1419,6 @@
         }
       },
       "title": "Status is received by routers/nodes by grpc"
-    },
-    "statusStatusCode": {
-      "type": "string",
-      "enum": [
-        "UNDEFINED",
-        "OK",
-        "CANCELED",
-        "INTERRUPTED",
-        "INCOMPLETE",
-        "SUSPENDED",
-        "FAILED"
-      ],
-      "default": "UNDEFINED"
-    },
-    "statusStatusResponse": {
-      "type": "object",
-      "properties": {
-        "sourceID": {
-          "type": "string"
-        },
-        "code": {
-          "$ref": "#/definitions/statusStatusCode"
-        },
-        "message": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
     },
     "topologyFilter": {
       "type": "object",

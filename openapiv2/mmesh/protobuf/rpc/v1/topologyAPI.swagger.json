@@ -76,7 +76,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -224,7 +224,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -665,7 +665,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -1721,6 +1721,52 @@
         }
       }
     },
+    "emptyEmpty": {
+      "type": "object"
+    },
+    "eventsEventMetrics": {
+      "type": "object",
+      "properties": {
+        "successCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "failCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "successProbability": {
+          "type": "number",
+          "format": "float"
+        },
+        "failProbability": {
+          "type": "number",
+          "format": "float"
+        },
+        "firstActivity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastActivity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "activityIndex": {
+          "type": "number",
+          "format": "float"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "lastResult": {
+          "$ref": "#/definitions/eventsEventResult"
+        }
+      }
+    },
     "eventsEventResult": {
       "type": "string",
       "enum": [
@@ -1777,6 +1823,25 @@
         }
       }
     },
+    "hsecCVSS": {
+      "type": "object",
+      "properties": {
+        "v2Vector": {
+          "type": "string"
+        },
+        "v3Vector": {
+          "type": "string"
+        },
+        "v2Score": {
+          "type": "number",
+          "format": "double"
+        },
+        "v3Score": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "hsecCauseMetadata": {
       "type": "object",
       "properties": {
@@ -1800,11 +1865,11 @@
         "code": {
           "$ref": "#/definitions/hsecCode"
         },
-        "ocurrences": {
+        "occurrences": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/hsecOcurrence"
+            "$ref": "#/definitions/hsecOccurrence"
           }
         }
       }
@@ -2186,6 +2251,9 @@
         },
         "dataSource": {
           "$ref": "#/definitions/hsecDataSource"
+        },
+        "vulnerability": {
+          "$ref": "#/definitions/hsecVulnerability"
         }
       }
     },
@@ -2393,7 +2461,7 @@
         }
       }
     },
-    "hsecOcurrence": {
+    "hsecOccurrence": {
       "type": "object",
       "properties": {
         "resource": {
@@ -2537,7 +2605,7 @@
           "type": "string"
         },
         "class": {
-          "$ref": "#/definitions/hsecResultClass"
+          "type": "string"
         },
         "type": {
           "type": "string"
@@ -2589,20 +2657,6 @@
         }
       }
     },
-    "hsecResultClass": {
-      "type": "string",
-      "enum": [
-        "RESULT_CLASS_UNKNOWN",
-        "RESULT_CLASS_OS_PKGS",
-        "RESULT_CLASS_LANG_PKGS",
-        "RESULT_CLASS_CONFIG",
-        "RESULT_CLASS_SECRET",
-        "RESULT_CLASS_LICENSE",
-        "RESULT_CLASS_LICENSE_FILE",
-        "RESULT_CLASS_CUSTOM"
-      ],
-      "default": "RESULT_CLASS_UNKNOWN"
-    },
     "hsecRootFS": {
       "type": "object",
       "properties": {
@@ -2653,6 +2707,65 @@
         }
       }
     },
+    "hsecSeverity": {
+      "type": "string",
+      "enum": [
+        "SEVERITY_UNKNOWN",
+        "SEVERITY_LOW",
+        "SEVERITY_MEDIUM",
+        "SEVERITY_HIGH",
+        "SEVERITY_CRITICAL"
+      ],
+      "default": "SEVERITY_UNKNOWN"
+    },
+    "hsecVulnerability": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "cweIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vendorSeverity": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/hsecSeverity"
+          },
+          "title": "map[sourceID]*Severity"
+        },
+        "CVSS": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/hsecCVSS"
+          },
+          "title": "map[sourceID]*CVSS"
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publishedDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "hsecVulnerabilityStatus": {
       "type": "string",
       "enum": [
@@ -2688,85 +2801,6 @@
         "timestamp": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "metricsEventMetrics": {
-      "type": "object",
-      "properties": {
-        "successCount": {
-          "type": "number",
-          "format": "float"
-        },
-        "failCount": {
-          "type": "number",
-          "format": "float"
-        },
-        "successProbability": {
-          "type": "number",
-          "format": "float"
-        },
-        "failProbability": {
-          "type": "number",
-          "format": "float"
-        },
-        "firstActivity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "lastActivity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "activityIndex": {
-          "type": "number",
-          "format": "float"
-        },
-        "score": {
-          "type": "number",
-          "format": "float"
-        },
-        "rating": {
-          "type": "string"
-        },
-        "lastResult": {
-          "$ref": "#/definitions/eventsEventResult"
-        }
-      }
-    },
-    "metricsHostMetrics": {
-      "type": "object",
-      "properties": {
-        "OS": {
-          "type": "string"
-        },
-        "uptime": {
-          "type": "string"
-        },
-        "loadAvg": {
-          "type": "number",
-          "format": "double"
-        },
-        "cpuUsage": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "cpuPressure": {
-          "type": "boolean"
-        },
-        "memoryUsage": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "memoryPressure": {
-          "type": "boolean"
-        },
-        "diskUsage": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "diskPressure": {
-          "type": "boolean"
         }
       }
     },
@@ -2869,11 +2903,11 @@
     "netdbAddressFamily": {
       "type": "string",
       "enum": [
-        "AF_UNKNOWN",
-        "AF_IP4",
-        "AF_IP6"
+        "UNKNOWN_AF",
+        "IP4",
+        "IP6"
       ],
-      "default": "AF_UNKNOWN"
+      "default": "UNKNOWN_AF"
     },
     "netdbConnection": {
       "type": "object",
@@ -2926,12 +2960,12 @@
     "netdbConnectionStatus": {
       "type": "string",
       "enum": [
-        "STATUS_UNKNOWN",
-        "STATUS_NEW",
-        "STATUS_ACTIVE",
-        "STATUS_DROPPED"
+        "UNKNOWN_STATUS",
+        "NEW",
+        "ACTIVE",
+        "DROPPED"
       ],
-      "default": "STATUS_UNKNOWN"
+      "default": "UNKNOWN_STATUS"
     },
     "netdbConntrackEntry": {
       "type": "object",
@@ -3024,15 +3058,15 @@
     "netdbProtocol": {
       "type": "string",
       "enum": [
-        "PROTO_UNKNOWN",
-        "PROTO_TCP",
-        "PROTO_UDP",
-        "PROTO_ICMP4",
-        "PROTO_ICMP6",
-        "PROTO_GRE",
-        "PROTO_SCTP"
+        "UNKNOWN_PROTO",
+        "TCP",
+        "UDP",
+        "ICMP4",
+        "ICMP6",
+        "GRE",
+        "SCTP"
       ],
-      "default": "PROTO_UNKNOWN"
+      "default": "UNKNOWN_PROTO"
     },
     "netdbTalker": {
       "type": "object",
@@ -3040,8 +3074,9 @@
         "addr": {
           "type": "string"
         },
-        "traffic": {
-          "$ref": "#/definitions/netdbTrafficByDirection"
+        "bytes": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -3060,7 +3095,14 @@
     "netdbTopTalkers": {
       "type": "object",
       "properties": {
-        "talkers": {
+        "src": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTalker"
+          }
+        },
+        "dst": {
           "type": "array",
           "items": {
             "type": "object",
@@ -3181,6 +3223,104 @@
             "type": "object",
             "$ref": "#/definitions/netdbTimeTrafficValue"
           }
+        },
+        "NTP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SNMP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "BGP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "LDAP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "LDAPS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "MySQL": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "PostgreSQL": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "MSSQL": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "Redis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "NFS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SIP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "SIPTLS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "AMQP": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
+        },
+        "AMQPS": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/netdbTimeTrafficValue"
+          }
         }
       }
     },
@@ -3267,32 +3407,16 @@
           "type": "string"
         },
         "byProtocol": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/netdbTrafficByProtocol"
-          },
-          "title": "map[TimeRange.String()]*TrafficByProtocol"
+          "$ref": "#/definitions/netdbTrafficByProtocol"
         },
         "byL5Port": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/netdbTrafficByL5Port"
-          },
-          "title": "map[TimeRange.String()]*TrafficByL5Port"
+          "$ref": "#/definitions/netdbTrafficByL5Port"
         },
         "byDirection": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/netdbTrafficByDirection"
-          },
-          "title": "map[TimeRange.String()]*TrafficByDirection"
+          "$ref": "#/definitions/netdbTrafficByDirection"
         },
         "topTalkers": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/netdbTopTalkers"
-          },
-          "title": "map[TimeRange.String()]*TopTalkers"
+          "$ref": "#/definitions/netdbTopTalkers"
         },
         "timestamp": {
           "type": "string",
@@ -3326,37 +3450,6 @@
       "properties": {
         "nextPageToken": {
           "type": "string"
-        }
-      }
-    },
-    "statusStatusCode": {
-      "type": "string",
-      "enum": [
-        "UNDEFINED",
-        "OK",
-        "CANCELED",
-        "INTERRUPTED",
-        "INCOMPLETE",
-        "SUSPENDED",
-        "FAILED"
-      ],
-      "default": "UNDEFINED"
-    },
-    "statusStatusResponse": {
-      "type": "object",
-      "properties": {
-        "sourceID": {
-          "type": "string"
-        },
-        "code": {
-          "$ref": "#/definitions/statusStatusCode"
-        },
-        "message": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
@@ -3427,7 +3520,7 @@
           "format": "int64"
         },
         "hostMetrics": {
-          "$ref": "#/definitions/metricsHostMetrics"
+          "$ref": "#/definitions/topologyHostMetrics"
         }
       }
     },
@@ -3516,6 +3609,42 @@
         "policy": {
           "$ref": "#/definitions/topologySecurityPolicy",
           "title": "ACCEPT, DROP"
+        }
+      }
+    },
+    "topologyHostMetrics": {
+      "type": "object",
+      "properties": {
+        "OS": {
+          "type": "string"
+        },
+        "uptime": {
+          "type": "string"
+        },
+        "loadAvg": {
+          "type": "number",
+          "format": "double"
+        },
+        "cpuUsage": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "cpuPressure": {
+          "type": "boolean"
+        },
+        "memoryUsage": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "memoryPressure": {
+          "type": "boolean"
+        },
+        "diskUsage": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "diskPressure": {
+          "type": "boolean"
         }
       }
     },
@@ -3737,7 +3866,7 @@
           "title": "map[endpointID]*Endpoint"
         },
         "eventMetrics": {
-          "$ref": "#/definitions/metricsEventMetrics"
+          "$ref": "#/definitions/eventsEventMetrics"
         },
         "type": {
           "$ref": "#/definitions/topologyNodeType"

@@ -74,7 +74,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -224,7 +224,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -386,7 +386,7 @@
                   }
                 },
                 "eventMetrics": {
-                  "$ref": "#/definitions/metricsEventMetrics"
+                  "$ref": "#/definitions/eventsEventMetrics"
                 }
               }
             }
@@ -456,7 +456,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/statusStatusResponse"
+              "$ref": "#/definitions/emptyEmpty"
             }
           },
           "default": {
@@ -624,7 +624,7 @@
                   }
                 },
                 "eventMetrics": {
-                  "$ref": "#/definitions/metricsEventMetrics"
+                  "$ref": "#/definitions/eventsEventMetrics"
                 }
               }
             }
@@ -937,35 +937,10 @@
         }
       }
     },
-    "eventsEventResult": {
-      "type": "string",
-      "enum": [
-        "UNKNOWN_RESULT",
-        "SUCCESS",
-        "FAIL"
-      ],
-      "default": "UNKNOWN_RESULT"
+    "emptyEmpty": {
+      "type": "object"
     },
-    "googlerpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "metricsEventMetrics": {
+    "eventsEventMetrics": {
       "type": "object",
       "properties": {
         "successCount": {
@@ -1005,6 +980,34 @@
         },
         "lastResult": {
           "$ref": "#/definitions/eventsEventResult"
+        }
+      }
+    },
+    "eventsEventResult": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN_RESULT",
+        "SUCCESS",
+        "FAIL"
+      ],
+      "default": "UNKNOWN_RESULT"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
         }
       }
     },
@@ -1421,7 +1424,7 @@
           }
         },
         "eventMetrics": {
-          "$ref": "#/definitions/metricsEventMetrics"
+          "$ref": "#/definitions/eventsEventMetrics"
         }
       }
     },
