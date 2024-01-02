@@ -339,7 +339,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/emptyEmpty"
+              "$ref": "#/definitions/emptyResponse"
             }
           },
           "default": {
@@ -625,7 +625,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/emptyEmpty"
+              "$ref": "#/definitions/emptyResponse"
             }
           },
           "default": {
@@ -1079,7 +1079,7 @@
         }
       }
     },
-    "emptyEmpty": {
+    "emptyResponse": {
       "type": "object"
     },
     "googlerpcStatus": {
