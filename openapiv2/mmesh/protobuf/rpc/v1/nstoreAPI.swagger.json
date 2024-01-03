@@ -363,30 +363,33 @@
     "blobChunk": {
       "type": "object",
       "properties": {
-        "sizeInBytes": {
+        "chunkSize": {
           "type": "string",
           "format": "int64",
-          "title": "len(Data) of send payloadChunk"
+          "description": "len(Data) of send payloadChunk",
+          "title": "int64 sendTime = 11;"
         },
         "chunkChecksum": {
           "type": "string",
           "format": "byte",
-          "description": "Blake2B checksum of payloadChunk data",
-          "title": "int64 sendTime = 21;"
+          "title": "checksum of payloadChunk data"
         },
         "data": {
           "type": "string",
           "format": "byte",
-          "title": "1MB chunk"
+          "title": "64 KiB chunk"
+        },
+        "chunkNumber": {
+          "type": "string",
+          "format": "int64"
         },
         "isLastChunk": {
-          "type": "boolean",
-          "title": "int64 chunkNumber = 51;"
+          "type": "boolean"
         },
         "payloadChecksum": {
           "type": "string",
           "format": "byte",
-          "title": "SHA256 checksum of the payload"
+          "title": "checksum of the payload"
         }
       }
     },
