@@ -360,6 +360,36 @@
     }
   },
   "definitions": {
+    "blobChunk": {
+      "type": "object",
+      "properties": {
+        "sizeInBytes": {
+          "type": "string",
+          "format": "int64",
+          "title": "len(Data) of send payloadChunk"
+        },
+        "chunkChecksum": {
+          "type": "string",
+          "format": "byte",
+          "description": "Blake2B checksum of payloadChunk data",
+          "title": "int64 sendTime = 21;"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "title": "1MB chunk"
+        },
+        "isLastChunk": {
+          "type": "boolean",
+          "title": "int64 chunkNumber = 51;"
+        },
+        "payloadChecksum": {
+          "type": "string",
+          "format": "byte",
+          "title": "SHA256 checksum of the payload"
+        }
+      }
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -1381,6 +1411,9 @@
         },
         "report": {
           "$ref": "#/definitions/hsecReport"
+        },
+        "reportChunk": {
+          "$ref": "#/definitions/blobChunk"
         },
         "timestamp": {
           "type": "string",
