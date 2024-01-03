@@ -366,22 +366,18 @@
         "chunkSize": {
           "type": "string",
           "format": "int64",
-          "description": "len(Data) of send payloadChunk",
-          "title": "int64 sendTime = 11;"
+          "description": "len(data) of payload chunk",
+          "title": "int64 sendTime = 11;\nint64 chunkNumber = 21;"
         },
         "chunkChecksum": {
           "type": "string",
           "format": "byte",
-          "title": "checksum of payloadChunk data"
+          "title": "checksum of payload chunk data"
         },
         "data": {
           "type": "string",
           "format": "byte",
-          "title": "64 KiB chunk"
-        },
-        "chunkNumber": {
-          "type": "string",
-          "format": "int64"
+          "title": "payload chunk data (64 KiB)"
         },
         "isLastChunk": {
           "type": "boolean"
