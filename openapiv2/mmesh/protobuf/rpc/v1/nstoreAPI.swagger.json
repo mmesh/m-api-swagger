@@ -1223,6 +1223,10 @@
         "type": {
           "type": "string"
         },
+        "scannedPackages": {
+          "type": "integer",
+          "format": "int32"
+        },
         "packages": {
           "type": "array",
           "items": {
