@@ -69,28 +69,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "controllerID": {
-                      "type": "string"
-                    },
-                    "queryID": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "timeRange": {
-                  "$ref": "#/definitions/nstoreTimeRange",
-                  "title": "namespace"
-                },
-                "metric": {
-                  "$ref": "#/definitions/metricsdbHostMetricType",
-                  "title": "key"
-                }
-              }
+              "$ref": "#/definitions/NStoreAPIGetNodeHostMetricsBody"
             }
           }
         ],
@@ -141,20 +120,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "controllerID": {
-                      "type": "string"
-                    },
-                    "queryID": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/NStoreAPIGetNodeHostSecurityReportBody"
             }
           }
         ],
@@ -205,20 +171,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "controllerID": {
-                      "type": "string"
-                    },
-                    "queryID": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/NStoreAPIGetNodeNetCtLogBody"
             }
           }
         ],
@@ -269,20 +222,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "controllerID": {
-                      "type": "string"
-                    },
-                    "queryID": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/NStoreAPIGetNodeNetCtStateBody"
             }
           }
         ],
@@ -333,23 +273,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "controllerID": {
-                      "type": "string"
-                    },
-                    "queryID": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "type": {
-                  "$ref": "#/definitions/netdbTrafficQueryType"
-                }
-              }
+              "$ref": "#/definitions/NStoreAPIGetNodeNetTrafficMetricsBody"
             }
           }
         ],
@@ -360,32 +284,97 @@
     }
   },
   "definitions": {
-    "blobChunk": {
+    "NStoreAPIGetNodeHostMetricsBody": {
       "type": "object",
       "properties": {
-        "chunkSize": {
-          "type": "string",
-          "format": "int64",
-          "description": "len(data) of payload chunk",
-          "title": "int64 sendTime = 11;\nint64 chunkNumber = 21;"
+        "request": {
+          "type": "object",
+          "properties": {
+            "controllerID": {
+              "type": "string"
+            },
+            "queryID": {
+              "type": "string"
+            }
+          }
         },
-        "chunkChecksum": {
-          "type": "string",
-          "format": "byte",
-          "title": "checksum of payload chunk data"
+        "timeRange": {
+          "$ref": "#/definitions/nstoreTimeRange",
+          "title": "namespace"
         },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "title": "payload chunk data (64 KiB)"
+        "metric": {
+          "$ref": "#/definitions/metricsdbHostMetricType",
+          "title": "key"
+        }
+      }
+    },
+    "NStoreAPIGetNodeHostSecurityReportBody": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "type": "object",
+          "properties": {
+            "controllerID": {
+              "type": "string"
+            },
+            "queryID": {
+              "type": "string"
+            }
+          }
         },
-        "isLastChunk": {
-          "type": "boolean"
+        "type": {
+          "$ref": "#/definitions/hsecdbReportQueryType"
+        }
+      }
+    },
+    "NStoreAPIGetNodeNetCtLogBody": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "type": "object",
+          "properties": {
+            "controllerID": {
+              "type": "string"
+            },
+            "queryID": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "NStoreAPIGetNodeNetCtStateBody": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "type": "object",
+          "properties": {
+            "controllerID": {
+              "type": "string"
+            },
+            "queryID": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "NStoreAPIGetNodeNetTrafficMetricsBody": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "type": "object",
+          "properties": {
+            "controllerID": {
+              "type": "string"
+            },
+            "queryID": {
+              "type": "string"
+            }
+          }
         },
-        "payloadChecksum": {
-          "type": "string",
-          "format": "byte",
-          "title": "checksum of the payload"
+        "type": {
+          "$ref": "#/definitions/netdbTrafficQueryType"
         }
       }
     },
@@ -1413,16 +1402,26 @@
           "type": "string"
         },
         "report": {
-          "$ref": "#/definitions/hsecReport"
-        },
-        "reportChunk": {
-          "$ref": "#/definitions/blobChunk"
+          "$ref": "#/definitions/hsecReport",
+          "title": "blob.Chunk reportChunk = 501;"
         },
         "timestamp": {
           "type": "string",
           "format": "int64"
         }
       }
+    },
+    "hsecdbReportQueryType": {
+      "type": "string",
+      "enum": [
+        "REPORT_UNSPECIFIED",
+        "REPORT_OS_PKGS",
+        "REPORT_VULNERABILITIES",
+        "REPORT_MISCONFIGS",
+        "REPORT_SECRETS",
+        "REPORT_LICENSES"
+      ],
+      "default": "REPORT_UNSPECIFIED"
     },
     "metricsdbHostMetricType": {
       "type": "string",

@@ -152,12 +152,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integrations": {
-                  "$ref": "#/definitions/thirdPartyIntegrations"
-                }
-              }
+              "$ref": "#/definitions/AccountAPISetAccountIntegrationsBody"
             }
           }
         ],
@@ -196,18 +191,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "companyName": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/AccountAPISetAccountMetadataBody"
             }
           }
         ],
@@ -218,6 +202,28 @@
     }
   },
   "definitions": {
+    "AccountAPISetAccountIntegrationsBody": {
+      "type": "object",
+      "properties": {
+        "integrations": {
+          "$ref": "#/definitions/thirdPartyIntegrations"
+        }
+      }
+    },
+    "AccountAPISetAccountMetadataBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        }
+      }
+    },
     "accountAccount": {
       "type": "object",
       "properties": {
@@ -286,22 +292,6 @@
             "type": "object",
             "$ref": "#/definitions/accountAccount"
           }
-        }
-      }
-    },
-    "accountLimit": {
-      "type": "object",
-      "properties": {
-        "overLimit": {
-          "type": "boolean"
-        },
-        "limitReachedDate": {
-          "type": "string",
-          "format": "int64"
-        },
-        "lastWarningDate": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
@@ -380,15 +370,16 @@
     "accountService": {
       "type": "object",
       "properties": {
-        "subscription": {
-          "$ref": "#/definitions/billingSubscription"
-        },
-        "isServiceProvider": {
-          "type": "boolean",
-          "title": "planType ::= \"network\" | \"service\" | \"other\"  | ...\nmap\u003cstring, billing.Subscription\u003e subscriptions = 1;  // map[planType]*Subscription"
+        "subscriptions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/billingSubscription"
+          },
+          "description": "billing.Subscription subscription = 1;\nserviceID ::= \"standard\" | \"serverless\" | \"enterprise\" | \"support\" | \"other\"  | ...\n\nmap[serviceID]*Subscription"
         },
         "suspended": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "bool isServiceProvider = 11;"
         },
         "canceled": {
           "type": "boolean"
@@ -417,9 +408,6 @@
         "lastUpdated": {
           "type": "string",
           "format": "int64"
-        },
-        "limit": {
-          "$ref": "#/definitions/accountLimit"
         },
         "tenants": {
           "type": "integer",
@@ -460,6 +448,15 @@
         "ACLs": {
           "type": "integer",
           "format": "int32"
+        },
+        "admUsers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "IAPUsers": {
+          "type": "integer",
+          "format": "int32",
+          "title": "int32 iapRoles = 213;\n int32 iapACLs = 214;"
         },
         "projects": {
           "type": "integer",
@@ -571,10 +568,6 @@
         "delinquent": {
           "type": "boolean"
         },
-        "hostedInvoiceURL": {
-          "type": "string",
-          "title": "string checkoutSessionID = 52;"
-        },
         "liveMode": {
           "type": "boolean"
         },
@@ -655,42 +648,26 @@
       "type": "object",
       "properties": {
         "accountID": {
-          "type": "string"
-        },
-        "subscriptionID": {
           "type": "string",
-          "title": "serviceID-pricingPlanID"
+          "title": "string subscriptionID = 2; // serviceID-pricingPlanID"
         },
         "serviceID": {
           "type": "string"
         },
-        "pricingPlanID": {
-          "type": "string"
-        },
-        "productID": {
+        "serviceProviderID": {
           "type": "string",
-          "description": "naming convention: providerPrefix_providerProductName",
-          "title": "string providerID = 5;"
-        },
-        "priceID": {
-          "type": "string",
-          "title": "naming convention: providerPrefix_providerPriceName"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64"
+          "description": "string providerID = 5;\n string productID = 6; // naming convention: providerPrefix_providerProductName\n string priceID = 7;   // naming convention: providerPrefix_providerPriceName",
+          "title": "string pricingPlanID = 4;"
         },
         "stripeCustomerID": {
           "type": "string"
         },
-        "stripeProductID": {
-          "type": "string"
-        },
-        "stripePriceID": {
+        "stripeCustomerEmail": {
           "type": "string"
         },
         "stripeSubscriptionID": {
-          "type": "string"
+          "type": "string",
+          "title": "string stripeProductID = 12;\nstring stripePriceID = 13;"
         },
         "defaultStripePaymentMethodID": {
           "type": "string"
@@ -751,6 +728,28 @@
         },
         "status": {
           "$ref": "#/definitions/billingSubscriptionStatus"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingSubscriptionItem"
+          }
+        }
+      }
+    },
+    "billingSubscriptionItem": {
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "type": "string"
+        },
+        "priceID": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -860,6 +859,14 @@
         }
       }
     },
+    "iamFeatureUser": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
     "iamMetric": {
       "type": "object",
       "properties": {
@@ -902,6 +909,12 @@
         },
         "eventMetrics": {
           "$ref": "#/definitions/eventsEventMetrics"
+        },
+        "admUser": {
+          "$ref": "#/definitions/iamFeatureUser"
+        },
+        "IAPUser": {
+          "$ref": "#/definitions/iamFeatureUser"
         }
       }
     },

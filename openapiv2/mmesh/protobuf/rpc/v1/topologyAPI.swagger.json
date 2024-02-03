@@ -151,16 +151,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "type": "string"
-                },
-                "routedSubnets": {
-                  "type": "boolean",
-                  "title": "connect subnets within the network"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIUpdateNetworkBody"
             }
           }
         ],
@@ -311,16 +302,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "type": "string"
-                },
-                "defaultPolicy": {
-                  "$ref": "#/definitions/topologySecurityPolicy",
-                  "title": "ACCEPT, DROP"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIUpdateSubnetBody"
             }
           }
         ],
@@ -473,15 +455,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "endpointID": {
-                  "type": "string"
-                },
-                "IPv4": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIRemoveSubnetIPAMEntryBody"
             }
           }
         ],
@@ -532,22 +506,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "type": "string"
-                },
-                "networkCIDR": {
-                  "type": "string"
-                },
-                "subnetCIDR": {
-                  "type": "string"
-                },
-                "defaultPolicy": {
-                  "$ref": "#/definitions/topologySecurityPolicy",
-                  "title": "ACCEPT, DROP"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPICreateSubnetBody"
             }
           }
         ],
@@ -592,22 +551,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "type": "string"
-                },
-                "networkCIDR": {
-                  "type": "string"
-                },
-                "routedSubnets": {
-                  "type": "boolean",
-                  "title": "connect subnets within the network"
-                },
-                "locationID": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPICreateNetworkBody"
             }
           }
         ],
@@ -736,38 +680,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "netID": {
-                  "type": "string"
-                },
-                "subnetID": {
-                  "type": "string"
-                },
-                "nodeName": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "port": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "externalPort": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "type": {
-                  "$ref": "#/definitions/topologyNodeType"
-                },
-                "replicaSet": {
-                  "type": "boolean"
-                },
-                "kubernetesAttrs": {
-                  "$ref": "#/definitions/topologyKubernetesAttrs"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPICreateGenericNodeBody"
             }
           }
         ],
@@ -855,15 +768,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "network": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIListSubnetsBody"
             }
           }
         ],
@@ -914,24 +819,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "nodeReq": {
-                  "type": "object"
-                },
-                "disableOps": {
-                  "type": "boolean"
-                },
-                "disableExec": {
-                  "type": "boolean"
-                },
-                "disableTransfer": {
-                  "type": "boolean"
-                },
-                "disablePortForwarding": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIUpdateNodeManagementBody"
             }
           }
         ],
@@ -982,18 +870,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "nodeReq": {
-                  "type": "object"
-                },
-                "nodeName": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIUpdateNodeMetadataBody"
             }
           }
         ],
@@ -1044,25 +921,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "nodeReq": {
-                  "type": "object"
-                },
-                "netID": {
-                  "type": "string"
-                },
-                "subnetID": {
-                  "type": "string"
-                },
-                "tags": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "int32 priority = 41;\n bool kubernetesGw = 51;\n bool disableRelay = 61;\n bool disableNetworking = 72;"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIUpdateNodeNetworkingBody"
             }
           }
         ],
@@ -1119,15 +978,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "subnet": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIListNodesBySubnetBody"
             }
           }
         ],
@@ -1184,37 +1035,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "subnetReq": {
-                  "type": "object"
-                },
-                "index": {
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "srcIPNet": {
-                  "type": "string"
-                },
-                "dstIPNet": {
-                  "type": "string",
-                  "title": "usually, the endpoint addr"
-                },
-                "proto": {
-                  "$ref": "#/definitions/topologyProtocol"
-                },
-                "dstPort": {
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "policy": {
-                  "$ref": "#/definitions/topologySecurityPolicy",
-                  "title": "ACCEPT, DROP"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPICreateNetworkFilterBody"
             }
           }
         ],
@@ -1330,37 +1151,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "subnetReq": {
-                  "type": "object"
-                },
-                "index": {
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "srcIPNet": {
-                  "type": "string"
-                },
-                "dstIPNet": {
-                  "type": "string",
-                  "title": "usually, the endpoint addr"
-                },
-                "proto": {
-                  "$ref": "#/definitions/topologyProtocol"
-                },
-                "dstPort": {
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "policy": {
-                  "$ref": "#/definitions/topologySecurityPolicy",
-                  "title": "ACCEPT, DROP"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIUpdateNetworkFilterBody"
             }
           }
         ],
@@ -1405,15 +1196,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "tenant": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIListNetworksBody"
             }
           }
         ],
@@ -1458,15 +1241,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "tenant": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/TopologyAPIListNodesByTenantBody"
             }
           }
         ],
@@ -1477,6 +1252,276 @@
     }
   },
   "definitions": {
+    "TopologyAPICreateGenericNodeBody": {
+      "type": "object",
+      "properties": {
+        "netID": {
+          "type": "string"
+        },
+        "subnetID": {
+          "type": "string"
+        },
+        "nodeName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "externalPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "$ref": "#/definitions/topologyNodeType"
+        },
+        "replicaSet": {
+          "type": "boolean"
+        },
+        "kubernetesAttrs": {
+          "$ref": "#/definitions/topologyKubernetesAttrs"
+        }
+      }
+    },
+    "TopologyAPICreateNetworkBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "networkCIDR": {
+          "type": "string"
+        },
+        "routedSubnets": {
+          "type": "boolean",
+          "title": "connect subnets within the network"
+        },
+        "locationID": {
+          "type": "string"
+        }
+      }
+    },
+    "TopologyAPICreateNetworkFilterBody": {
+      "type": "object",
+      "properties": {
+        "subnetReq": {
+          "type": "object"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "srcIPNet": {
+          "type": "string"
+        },
+        "dstIPNet": {
+          "type": "string",
+          "title": "usually, the endpoint addr"
+        },
+        "proto": {
+          "$ref": "#/definitions/topologyProtocol"
+        },
+        "dstPort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "policy": {
+          "$ref": "#/definitions/topologySecurityPolicy",
+          "title": "ACCEPT, DROP"
+        }
+      }
+    },
+    "TopologyAPICreateSubnetBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "networkCIDR": {
+          "type": "string"
+        },
+        "subnetCIDR": {
+          "type": "string"
+        },
+        "defaultPolicy": {
+          "$ref": "#/definitions/topologySecurityPolicy",
+          "title": "ACCEPT, DROP"
+        }
+      }
+    },
+    "TopologyAPIListNetworksBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "tenant": {
+          "type": "object"
+        }
+      }
+    },
+    "TopologyAPIListNodesBySubnetBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "subnet": {
+          "type": "object"
+        }
+      }
+    },
+    "TopologyAPIListNodesByTenantBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "tenant": {
+          "type": "object"
+        }
+      }
+    },
+    "TopologyAPIListSubnetsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "network": {
+          "type": "object"
+        }
+      }
+    },
+    "TopologyAPIRemoveSubnetIPAMEntryBody": {
+      "type": "object",
+      "properties": {
+        "endpointID": {
+          "type": "string"
+        },
+        "IPv4": {
+          "type": "string"
+        }
+      }
+    },
+    "TopologyAPIUpdateNetworkBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "routedSubnets": {
+          "type": "boolean",
+          "title": "connect subnets within the network"
+        }
+      }
+    },
+    "TopologyAPIUpdateNetworkFilterBody": {
+      "type": "object",
+      "properties": {
+        "subnetReq": {
+          "type": "object"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "srcIPNet": {
+          "type": "string"
+        },
+        "dstIPNet": {
+          "type": "string",
+          "title": "usually, the endpoint addr"
+        },
+        "proto": {
+          "$ref": "#/definitions/topologyProtocol"
+        },
+        "dstPort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "policy": {
+          "$ref": "#/definitions/topologySecurityPolicy",
+          "title": "ACCEPT, DROP"
+        }
+      }
+    },
+    "TopologyAPIUpdateNodeManagementBody": {
+      "type": "object",
+      "properties": {
+        "nodeReq": {
+          "type": "object"
+        },
+        "disableOps": {
+          "type": "boolean"
+        },
+        "disableExec": {
+          "type": "boolean"
+        },
+        "disableTransfer": {
+          "type": "boolean"
+        },
+        "disablePortForwarding": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TopologyAPIUpdateNodeMetadataBody": {
+      "type": "object",
+      "properties": {
+        "nodeReq": {
+          "type": "object"
+        },
+        "nodeName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "TopologyAPIUpdateNodeNetworkingBody": {
+      "type": "object",
+      "properties": {
+        "nodeReq": {
+          "type": "object"
+        },
+        "netID": {
+          "type": "string"
+        },
+        "subnetID": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "int32 priority = 41;\n bool kubernetesGw = 51;\n bool disableRelay = 61;\n bool disableNetworking = 72;"
+        }
+      }
+    },
+    "TopologyAPIUpdateSubnetBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "defaultPolicy": {
+          "$ref": "#/definitions/topologySecurityPolicy",
+          "title": "ACCEPT, DROP"
+        }
+      }
+    },
     "datetimeDateTime": {
       "type": "object",
       "properties": {

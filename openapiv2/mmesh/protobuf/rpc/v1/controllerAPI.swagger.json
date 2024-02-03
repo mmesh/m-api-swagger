@@ -89,22 +89,6 @@
     }
   },
   "definitions": {
-    "accountLimit": {
-      "type": "object",
-      "properties": {
-        "overLimit": {
-          "type": "boolean"
-        },
-        "limitReachedDate": {
-          "type": "string",
-          "format": "int64"
-        },
-        "lastWarningDate": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
     "accountStats": {
       "type": "object",
       "properties": {
@@ -119,9 +103,6 @@
         "lastUpdated": {
           "type": "string",
           "format": "int64"
-        },
-        "limit": {
-          "$ref": "#/definitions/accountLimit"
         },
         "tenants": {
           "type": "integer",
@@ -162,6 +143,15 @@
         "ACLs": {
           "type": "integer",
           "format": "int32"
+        },
+        "admUsers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "IAPUsers": {
+          "type": "integer",
+          "format": "int32",
+          "title": "int32 iapRoles = 213;\n int32 iapACLs = 214;"
         },
         "projects": {
           "type": "integer",

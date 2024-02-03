@@ -165,12 +165,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "comment": {
-                  "$ref": "#/definitions/eventsAlertComment"
-                }
-              }
+              "$ref": "#/definitions/MonitoringAPINewAlertCommentBody"
             }
           }
         ],
@@ -252,15 +247,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "tenant": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/MonitoringAPIListAlertsBody"
             }
           }
         ],
@@ -271,6 +258,25 @@
     }
   },
   "definitions": {
+    "MonitoringAPIListAlertsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "tenant": {
+          "type": "object"
+        }
+      }
+    },
+    "MonitoringAPINewAlertCommentBody": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "$ref": "#/definitions/eventsAlertComment"
+        }
+      }
+    },
     "emptyResponse": {
       "type": "object"
     },

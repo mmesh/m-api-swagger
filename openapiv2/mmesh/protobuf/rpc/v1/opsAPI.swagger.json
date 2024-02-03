@@ -148,21 +148,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "reviewRequired": {
-                  "type": "boolean"
-                },
-                "approvalRequired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/OpsAPISetProjectBody"
             }
           }
         ],
@@ -310,85 +296,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "token": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "reviewed": {
-                  "type": "boolean"
-                },
-                "reviewers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "[]string{email1, email2..}"
-                },
-                "reviewedBy": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/definitions/opsValidation"
-                  },
-                  "title": "map[email]*Validation"
-                },
-                "approved": {
-                  "type": "boolean"
-                },
-                "approvers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "[]string{email1, email2..}"
-                },
-                "approvedBy": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/definitions/opsValidation"
-                  },
-                  "title": "map[email]*Validation"
-                },
-                "triggers": {
-                  "$ref": "#/definitions/opsTriggers"
-                },
-                "tasks": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/opsTask"
-                  }
-                },
-                "notify": {
-                  "$ref": "#/definitions/opsNotify"
-                },
-                "targets": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/topologyNodeReq"
-                  }
-                },
-                "taskLogs": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/opsTaskLog"
-                  }
-                },
-                "eventMetrics": {
-                  "$ref": "#/definitions/eventsEventMetrics"
-                }
-              }
+              "$ref": "#/definitions/OpsAPISetWorkflowBody"
             }
           }
         ],
@@ -545,88 +453,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "workflowID": {
-                  "type": "string"
-                },
-                "token": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "reviewed": {
-                  "type": "boolean"
-                },
-                "reviewers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "[]string{email1, email2..}"
-                },
-                "reviewedBy": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/definitions/opsValidation"
-                  },
-                  "title": "map[email]*Validation"
-                },
-                "approved": {
-                  "type": "boolean"
-                },
-                "approvers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "[]string{email1, email2..}"
-                },
-                "approvedBy": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/definitions/opsValidation"
-                  },
-                  "title": "map[email]*Validation"
-                },
-                "triggers": {
-                  "$ref": "#/definitions/opsTriggers"
-                },
-                "tasks": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/opsTask"
-                  }
-                },
-                "notify": {
-                  "$ref": "#/definitions/opsNotify"
-                },
-                "targets": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/topologyNodeReq"
-                  }
-                },
-                "taskLogs": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/opsTaskLog"
-                  }
-                },
-                "eventMetrics": {
-                  "$ref": "#/definitions/eventsEventMetrics"
-                }
-              }
+              "$ref": "#/definitions/OpsAPICreateWorkflowBody"
             }
           }
         ],
@@ -671,21 +498,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "reviewRequired": {
-                  "type": "boolean"
-                },
-                "approvalRequired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/OpsAPICreateProjectBody"
             }
           }
         ],
@@ -772,15 +585,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "project": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/OpsAPIListWorkflowsBody"
             }
           }
         ],
@@ -824,15 +629,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "tenant": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/OpsAPIListProjectsBody"
             }
           }
         ],
@@ -889,15 +686,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                },
-                "workflow": {
-                  "type": "object"
-                }
-              }
+              "$ref": "#/definitions/OpsAPIListTaskLogsBody"
             }
           }
         ],
@@ -908,6 +697,238 @@
     }
   },
   "definitions": {
+    "OpsAPICreateProjectBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "reviewRequired": {
+          "type": "boolean"
+        },
+        "approvalRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OpsAPICreateWorkflowBody": {
+      "type": "object",
+      "properties": {
+        "workflowID": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "reviewed": {
+          "type": "boolean"
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "[]string{email1, email2..}"
+        },
+        "reviewedBy": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/opsValidation"
+          },
+          "title": "map[email]*Validation"
+        },
+        "approved": {
+          "type": "boolean"
+        },
+        "approvers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "[]string{email1, email2..}"
+        },
+        "approvedBy": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/opsValidation"
+          },
+          "title": "map[email]*Validation"
+        },
+        "triggers": {
+          "$ref": "#/definitions/opsTriggers"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/opsTask"
+          }
+        },
+        "notify": {
+          "$ref": "#/definitions/opsNotify"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyNodeReq"
+          }
+        },
+        "taskLogs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/opsTaskLog"
+          }
+        },
+        "eventMetrics": {
+          "$ref": "#/definitions/eventsEventMetrics"
+        }
+      }
+    },
+    "OpsAPIListProjectsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "tenant": {
+          "type": "object"
+        }
+      }
+    },
+    "OpsAPIListTaskLogsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "workflow": {
+          "type": "object"
+        }
+      }
+    },
+    "OpsAPIListWorkflowsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        },
+        "project": {
+          "type": "object"
+        }
+      }
+    },
+    "OpsAPISetProjectBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "reviewRequired": {
+          "type": "boolean"
+        },
+        "approvalRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OpsAPISetWorkflowBody": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "reviewed": {
+          "type": "boolean"
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "[]string{email1, email2..}"
+        },
+        "reviewedBy": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/opsValidation"
+          },
+          "title": "map[email]*Validation"
+        },
+        "approved": {
+          "type": "boolean"
+        },
+        "approvers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "[]string{email1, email2..}"
+        },
+        "approvedBy": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/opsValidation"
+          },
+          "title": "map[email]*Validation"
+        },
+        "triggers": {
+          "$ref": "#/definitions/opsTriggers"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/opsTask"
+          }
+        },
+        "notify": {
+          "$ref": "#/definitions/opsNotify"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topologyNodeReq"
+          }
+        },
+        "taskLogs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/opsTaskLog"
+          }
+        },
+        "eventMetrics": {
+          "$ref": "#/definitions/eventsEventMetrics"
+        }
+      }
+    },
     "datetimeDateTime": {
       "type": "object",
       "properties": {

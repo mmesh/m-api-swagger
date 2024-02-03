@@ -64,28 +64,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "emailID": {
-                  "type": "string",
-                  "title": "methodID"
-                },
-                "code": {
-                  "type": "string"
-                },
-                "IPAddress": {
-                  "type": "string",
-                  "description": "optional",
-                  "title": "string sessionToken = 51; // existing sessionToken\nstring sessionJWT = 52;   // existing sessionJWT"
-                },
-                "userAgent": {
-                  "type": "string",
-                  "title": "optional"
-                }
-              }
+              "$ref": "#/definitions/ManagerAPIVerifyUserEmailBody"
             }
           }
         ],
@@ -129,13 +108,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string"
-                }
-              },
-              "title": "user email"
+              "$ref": "#/definitions/ManagerAPISetUserEmailBody"
             }
           }
         ],
@@ -284,12 +257,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                }
-              }
+              "$ref": "#/definitions/ManagerAPIListRoutersBody"
             }
           }
         ],
@@ -403,7 +371,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ManagerAPICreateRouterWebhookBody"
             }
           }
         ],
@@ -441,15 +409,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "routerName": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ManagerAPICreateRouterBody"
             }
           }
         ],
@@ -493,15 +453,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "routerReq": {
-                  "type": "object"
-                },
-                "cfg": {
-                  "$ref": "#/definitions/topologyRouterCfg"
-                }
-              }
+              "$ref": "#/definitions/ManagerAPISetRouterCfgBody"
             }
           }
         ],
@@ -718,6 +670,72 @@
     }
   },
   "definitions": {
+    "ManagerAPICreateRouterBody": {
+      "type": "object",
+      "properties": {
+        "routerName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagerAPICreateRouterWebhookBody": {
+      "type": "object"
+    },
+    "ManagerAPIListRoutersBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        }
+      }
+    },
+    "ManagerAPISetRouterCfgBody": {
+      "type": "object",
+      "properties": {
+        "routerReq": {
+          "type": "object"
+        },
+        "cfg": {
+          "$ref": "#/definitions/topologyRouterCfg"
+        }
+      }
+    },
+    "ManagerAPISetUserEmailBody": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "user email"
+    },
+    "ManagerAPIVerifyUserEmailBody": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "emailID": {
+          "type": "string",
+          "title": "methodID"
+        },
+        "code": {
+          "type": "string"
+        },
+        "IPAddress": {
+          "type": "string",
+          "description": "optional",
+          "title": "string sessionToken = 51; // existing sessionToken\nstring sessionJWT = 52;   // existing sessionJWT"
+        },
+        "userAgent": {
+          "type": "string",
+          "title": "optional"
+        }
+      }
+    },
     "authAuthKey": {
       "type": "object",
       "properties": {
@@ -1412,10 +1430,8 @@
           "type": "boolean"
         },
         "deleted": {
-          "type": "boolean"
-        },
-        "overLimit": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "bool overLimit = 31;"
         }
       },
       "title": "Status is received by routers/nodes by grpc"

@@ -57,12 +57,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                }
-              }
+              "$ref": "#/definitions/TenantAPIListTenantsBody"
             }
           }
         ],
@@ -177,15 +172,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/TenantAPIUpdateTenantBody"
             }
           }
         ],
@@ -224,15 +211,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/TenantAPICreateTenantBody"
             }
           }
         ],
@@ -274,6 +253,36 @@
     }
   },
   "definitions": {
+    "TenantAPICreateTenantBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "TenantAPIListTenantsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        }
+      }
+    },
+    "TenantAPIUpdateTenantBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
     "emptyResponse": {
       "type": "object"
     },

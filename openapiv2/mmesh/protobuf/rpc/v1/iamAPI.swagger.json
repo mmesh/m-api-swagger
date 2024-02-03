@@ -57,12 +57,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                }
-              }
+              "$ref": "#/definitions/IAMAPIListACLsBody"
             }
           }
         ],
@@ -216,23 +211,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "nodeIDs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "objects (nodeIDs): \"p, \u003cacl\u003e, \u003crealm\u003e, \u003cnodeID\u003e\""
-                },
-                "users": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "boolean"
-                  },
-                  "title": "subjects (users): \"g, \u003cuser\u003e, \u003cacl\u003e, \u003crealm\u003e\""
-                }
-              }
+              "$ref": "#/definitions/IAMAPISetACLBody"
             }
           }
         ],
@@ -271,12 +250,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                }
-              }
+              "$ref": "#/definitions/IAMAPIListRolesBody"
             }
           }
         ],
@@ -430,23 +404,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "permissions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "objects (permissions): \"p, \u003crole\u003e, \u003crealm\u003e, \u003cpermission\u003e\""
-                },
-                "users": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "boolean"
-                  },
-                  "title": "subjects (users): \"g, \u003cuser\u003e, \u003crole\u003e, \u003crealm\u003e\""
-                }
-              }
+              "$ref": "#/definitions/IAMAPISetRoleBody"
             }
           }
         ],
@@ -485,12 +443,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                }
-              }
+              "$ref": "#/definitions/IAMAPIListSecurityGroupsBody"
             }
           }
         ],
@@ -644,23 +597,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "tenantIDs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "objects (tenantIDs): \"p, \u003csegurity-group\u003e, \u003crealm\u003e, \u003ctenantID\u003e\""
-                },
-                "users": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "boolean"
-                  },
-                  "title": "subjects (users): \"g, \u003cuser\u003e, \u003csegurity-group\u003e, \u003crealm\u003e\""
-                }
-              }
+              "$ref": "#/definitions/IAMAPISetSecurityGroupBody"
             }
           }
         ],
@@ -698,12 +635,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/resourceListRequest"
-                }
-              }
+              "$ref": "#/definitions/IAMAPIListUsersBody"
             }
           }
         ],
@@ -823,7 +755,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/IAMAPIDisableUserBody"
             }
           }
         ],
@@ -869,7 +801,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/IAMAPIEnableUserBody"
             }
           }
         ],
@@ -916,12 +848,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "RBAC": {
-                  "$ref": "#/definitions/iamUserRBAC"
-                }
-              }
+              "$ref": "#/definitions/IAMAPISetUserPermissionsBody"
             }
           }
         ],
@@ -967,7 +894,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/IAMAPINewUserTokenBody"
             }
           }
         ],
@@ -1007,21 +934,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "locationID": {
-                  "type": "string"
-                },
-                "federationID": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "RBAC": {
-                  "$ref": "#/definitions/iamUserRBAC"
-                }
-              }
+              "$ref": "#/definitions/IAMAPICreateUserBody"
             }
           }
         ],
@@ -1086,6 +999,129 @@
     }
   },
   "definitions": {
+    "IAMAPICreateUserBody": {
+      "type": "object",
+      "properties": {
+        "locationID": {
+          "type": "string"
+        },
+        "federationID": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "RBAC": {
+          "$ref": "#/definitions/iamUserRBAC"
+        }
+      }
+    },
+    "IAMAPIDisableUserBody": {
+      "type": "object"
+    },
+    "IAMAPIEnableUserBody": {
+      "type": "object"
+    },
+    "IAMAPIListACLsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        }
+      }
+    },
+    "IAMAPIListRolesBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        }
+      }
+    },
+    "IAMAPIListSecurityGroupsBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        }
+      }
+    },
+    "IAMAPIListUsersBody": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/resourceListRequest"
+        }
+      }
+    },
+    "IAMAPINewUserTokenBody": {
+      "type": "object"
+    },
+    "IAMAPISetACLBody": {
+      "type": "object",
+      "properties": {
+        "nodeIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "objects (nodeIDs): \"p, \u003cacl\u003e, \u003crealm\u003e, \u003cnodeID\u003e\""
+        },
+        "users": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "subjects (users): \"g, \u003cuser\u003e, \u003cacl\u003e, \u003crealm\u003e\""
+        }
+      }
+    },
+    "IAMAPISetRoleBody": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "objects (permissions): \"p, \u003crole\u003e, \u003crealm\u003e, \u003cpermission\u003e\""
+        },
+        "users": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "subjects (users): \"g, \u003cuser\u003e, \u003crole\u003e, \u003crealm\u003e\""
+        }
+      }
+    },
+    "IAMAPISetSecurityGroupBody": {
+      "type": "object",
+      "properties": {
+        "tenantIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "objects (tenantIDs): \"p, \u003csegurity-group\u003e, \u003crealm\u003e, \u003ctenantID\u003e\""
+        },
+        "users": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "subjects (users): \"g, \u003cuser\u003e, \u003csegurity-group\u003e, \u003crealm\u003e\""
+        }
+      }
+    },
+    "IAMAPISetUserPermissionsBody": {
+      "type": "object",
+      "properties": {
+        "RBAC": {
+          "$ref": "#/definitions/iamUserRBAC"
+        }
+      }
+    },
     "emptyResponse": {
       "type": "object"
     },
@@ -1199,6 +1235,14 @@
             "type": "object",
             "$ref": "#/definitions/iamACL"
           }
+        }
+      }
+    },
+    "iamFeatureUser": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
         }
       }
     },
@@ -1454,6 +1498,12 @@
         },
         "eventMetrics": {
           "$ref": "#/definitions/eventsEventMetrics"
+        },
+        "admUser": {
+          "$ref": "#/definitions/iamFeatureUser"
+        },
+        "IAPUser": {
+          "$ref": "#/definitions/iamFeatureUser"
         }
       }
     },
